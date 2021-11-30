@@ -1,0 +1,6 @@
+.elements__list{
+  display: grid;
+  margin: 0 auto;
+  padding: 0;
+  grid-template-columns: repeat(auto-fit, 1fr);
+}

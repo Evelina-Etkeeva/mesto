@@ -1,0 +1,13 @@
+.element__recktangle{
+  background-color: white;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-width: 282px;
+  height: 361px;
+  position: relative;
+  overflow: hidden;
+}
