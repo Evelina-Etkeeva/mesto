@@ -1,0 +1,23 @@
+.edit_button{
+  border: 1px solid #FFFFFF;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../images/edit_button.svg);
+  background-position: center;
+  background-size: 10px;
+  background-repeat: no-repeat;
+  grid-area: edit;
+  margin: 0;
+  padding: 0;
+  justify-self: start;
+  align-self: end;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 880px) {
+  .edit_button{
+    width: 18px;
+    height: 18px;
+    background-size: 8px;
+    justify-self: end;
+  }
+}

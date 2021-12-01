@@ -1,0 +1,23 @@
+.add_button{
+  border: 1px solid #FFFFFF;
+  width: 150px;
+  height: 50px;
+  background-image: url(../../images/Vectorsumbol.svg);
+  background-position: center;
+  background-size: 22px;
+  background-repeat: no-repeat;
+  grid-area: add_button;
+  justify-self: end;
+  align-self: center;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+@media screen and (max-width: 880px) {
+  .add_button{
+    width: 282px;
+    height: 50px;
+    background-size: 16px;
+    margin: 36px 0 0;
+  }
+}

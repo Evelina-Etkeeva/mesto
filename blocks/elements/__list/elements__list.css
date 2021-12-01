@@ -1,6 +1,11 @@
 .elements__list{
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 282px));
+  padding: 0;
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 0;
-  grid-template-columns: repeat(auto-fit, 1fr);
+  row-gap: 20px;
+  column-gap: 17px;
+  justify-content: center;
 }
