@@ -8,11 +8,9 @@
   padding: 0;
   color: #FFFFFF;
   grid-area: about_me;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   max-width: 520px;
   text-rendering: optimizeLegibility;
+  align-self: baseline;
 }
 
 @media screen and (max-width:880px) {

@@ -1,24 +1,21 @@
 .profile__name{
-  font-family: Inter;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
-   line-height: 0.75;
-  /* line-height: 48px; почему поле для высоты строки добавляется и сверху и снизу - не могу поставить кнопку в одну линию с текстом*/
-  bottom: 0;
+  line-height: 48px;
+  /* почему поле для высоты строки добавляется и сверху и снизу - не могу поставить кнопку в одну линию с текстом*/
   color: #FFFFFF;
   margin: 0;
   padding: 0;
   grid-area: name;
   justify-self: start;
   align-self: end;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   max-width: 480px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  align-self: baseline;
 }
 
 @media screen and (max-width: 880px) {

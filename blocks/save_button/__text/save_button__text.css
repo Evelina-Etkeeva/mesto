@@ -1,0 +1,17 @@
+.save_button__text{
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 14px 0 0;
+
+}
+
+@media screen and (max-width: 880px) {
+  .save_button__text{
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

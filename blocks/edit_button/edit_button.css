@@ -9,9 +9,10 @@
   grid-area: edit;
   margin: 0;
   padding: 0;
-  justify-self: start;
-  align-self: end;
+
+  align-self: baseline;
   box-sizing: border-box;
+  transition: opacity .3s;
 }
 @media screen and (max-width: 880px) {
   .edit_button{
@@ -20,4 +21,8 @@
     background-size: 8px;
     justify-self: end;
   }
+}
+
+.edit_button:hover{
+  opacity: 0.8;
 }

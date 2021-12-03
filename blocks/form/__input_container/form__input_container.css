@@ -1,0 +1,7 @@
+/*зона с формами под заголовком*/
+.form__input-container {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
