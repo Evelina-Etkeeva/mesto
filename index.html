@@ -97,22 +97,17 @@
       </section>
 
       <section class="form">
-        <div class="form__background">
-
         <div class="form__container">
           <a class="close_button" href=""></a>
 
           <fieldset class="form__input-container form__input-container_ctrl_texts">
             <h2 class="form__header">Редактировать профиль</h2>
-            <input type="text" class="form__item form__item_el_name" id="el_name"
-            name="el_name" placeholder="Имя" required>
-            <textarea type="text" class="form__item form__item_el_about_me"
-            id="about_me" name="about_me" placeholder="О себе" required></textarea>
+            <input type="text" class="form__item form__item_el_name" id="el_name" name="el_name" placeholder="Имя" maxlength='50' required>
+            <textarea class="form__item form__item_el_about_me" id="about_me" name="about_me" placeholder="О себе" maxlength='500' required></textarea>
           </fieldset>
           <a class="save_button" href="#">
             <p class="save_button__text">Сохранить</p>
           </a>
-        </div>
         </div>
 
       </section>
