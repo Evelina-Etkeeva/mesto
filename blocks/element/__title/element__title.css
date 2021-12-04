@@ -5,7 +5,7 @@
   text-rendering: optimizeLegibility;
   color: black;
   grid-area: title;
-  justify-self: end;
+  justify-self: start;
   max-width: 190px;
   text-overflow: ellipsis;
   white-space: nowrap;

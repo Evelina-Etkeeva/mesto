@@ -31,7 +31,6 @@ function close_form (event) {
 edit.addEventListener('click', open_form);
 
 exit.addEventListener('click', close_form);
-formBackground.addEventListener('click', close_form);
 
 // форма имя
 let nameInput = document.querySelector('.form__item_el_name');
@@ -40,6 +39,7 @@ let nameInput = document.querySelector('.form__item_el_name');
 let aboutMeInput = document.querySelector('.form__item_el_about_me');
 //кнопка
 let formElementSaveButton = document.querySelector('.save_button');
+//console.log(formElementSaveButton);
 // имя в профиле
 let myName = document.querySelector('.profile__name');
 //console.log(myName.textContent);
@@ -50,6 +50,7 @@ let aboutMe = document.querySelector('.profile__about_me');// Воспользу
 function formSubmitHandler (event) {
     event.preventDefault();
     myName.textContent = nameInput.value;
+    //console.log(myName);
     aboutMe.textContent = aboutMeInput.value;
     form.classList.remove('js_form_active');
     page.classList.remove('page_no_scroll');

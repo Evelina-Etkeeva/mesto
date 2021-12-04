@@ -4,6 +4,9 @@
   background-color: rgba(0, 0, 0, 1);
   transition: opacity .3s;
   text-decoration: none;
+  border: 0;
+  margin: 48px 0 0 0;
+  padding: 0;
 }
 
 .save_button:hover{
