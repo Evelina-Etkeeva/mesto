@@ -26,7 +26,6 @@
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   color: #000;
   line-height: 17px;
-  white-space: wrap;
   }
 
 .form__item::-webkit-input-placeholder{
@@ -34,7 +33,6 @@
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   color: #000;
   line-height: 17px;
-  white-space: wrap;
 }
 
 .form__item::-moz-placeholder{
@@ -42,7 +40,6 @@
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   color: #000;
   line-height: 17px;
-  white-space: wrap;
 }
 
 .form__item::-ms-input-placeholder{
@@ -50,7 +47,6 @@
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   color: #000;
   line-height: 17px;
-  white-space: wrap;
 }
 
 @media screen and (max-width: 880px) {
