@@ -1,5 +1,5 @@
 //console.log("hi"); Проверка подключения
-let edit = document.querySelector('.profile__edit_button');
+let edit = document.querySelector('.profile__editBtn');
 // console.log(edit); Выбор кнопки редактировать профиль
 let form = document.querySelector('.form');
 //console.log(form); Выбор секции с попапом
