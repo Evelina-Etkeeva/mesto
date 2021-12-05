@@ -39,6 +39,6 @@
 @import url(../blocks/closeButton/closeButton.css);
 
 @import url(../blocks/saveButton/saveButton.css);
-@import url(../blocks/saveButton/__text/saveButton__text.css);
+@import url(../blocks/saveButton/_text/saveButton_text.css);
 
 
