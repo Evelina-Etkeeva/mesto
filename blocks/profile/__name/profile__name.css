@@ -10,7 +10,6 @@
   padding: 0;
   grid-area: name;
   justify-self: start;
-  align-self: end;
   max-width: 480px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

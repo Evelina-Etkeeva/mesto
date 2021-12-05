@@ -6,7 +6,7 @@
   grid-template-areas:
   "name edit"
   "about_me about_me";
-  row-gap: 18px;
+  row-gap:18px;
   column-gap: 18px;
   grid-template-columns: repeat(2, fit-content(520px));
   align-content: center;
@@ -17,6 +17,6 @@
     row-gap: 14px;
     column-gap: 10px;
     margin: 22px 0 0;
-    row-gap: 14px;
+    row-gap:14px;
   }
 }
