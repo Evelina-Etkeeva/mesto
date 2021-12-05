@@ -3,7 +3,7 @@ let edit = document.querySelector('.profile__editBtn');
 // console.log(edit); Выбор кнопки редактировать профиль
 let form = document.querySelector('.form');
 //console.log(form); Выбор секции с попапом
-let exit = document.querySelector('.close_button');
+let exit = document.querySelector('.closeButton');
 //console.log(exit); Выбор кнопки закрыть попап
 let page = document.querySelector('.page');
 //console.log(page); Выбор всей страницы для отклюения скролла
@@ -15,7 +15,7 @@ function open_form (event) {
   event.preventDefault();
   //плейсхолдер = данным на странице
   document.querySelector('.form__item_el_name').placeholder = document.querySelector('.profile__name').textContent;
-  document.querySelector('.form__item_el_about_me').placeholder = document.querySelector('.profile__aboutMe').textContent;
+  document.querySelector('.form__item_el_aboutMe').placeholder = document.querySelector('.profile__aboutMe').textContent;
   form.classList.add('js_form_active');
   page.classList.add('page_no_scroll');
 }
@@ -33,9 +33,9 @@ exit.addEventListener('click', close_form);
 // форма имя
 let nameInput = document.querySelector('.form__item_el_name');
 // форма обо мне
-let aboutMeInput = document.querySelector('.form__item_el_about_me');
+let aboutMeInput = document.querySelector('.form__item_el_aboutMe');
 //кнопка
-let formElementSaveButton = document.querySelector('.save_button');
+let formElementSaveButton = document.querySelector('.saveButton');
 // имя в профиле
 let myName = document.querySelector('.profile__name');
 // обо мне в профиле
