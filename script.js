@@ -8,14 +8,14 @@ let exit = document.querySelector('.close_button');
 let page = document.querySelector('.page');
 //console.log(page); Выбор всей страницы для отклюения скролла
 
-//плейсхолдер = данным на странице
-document.querySelector('.form__item_el_name').placeholder = document.querySelector('.profile__name').textContent;
 
-document.querySelector('.form__item_el_about_me').placeholder = document.querySelector('.profile__about_me').textContent;
 
 //открытие формы с отключением скролла
 function open_form (event) {
   event.preventDefault();
+  //плейсхолдер = данным на странице
+  document.querySelector('.form__item_el_name').placeholder = document.querySelector('.profile__name').textContent;
+  document.querySelector('.form__item_el_about_me').placeholder = document.querySelector('.profile__about_me').textContent;
   form.classList.add('js_form_active');
   page.classList.add('page_no_scroll');
 }
