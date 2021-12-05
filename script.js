@@ -15,7 +15,7 @@ function open_form (event) {
   event.preventDefault();
   //плейсхолдер = данным на странице
   document.querySelector('.form__item_el_name').placeholder = document.querySelector('.profile__name').textContent;
-  document.querySelector('.form__item_el_about_me').placeholder = document.querySelector('.profile__about_me').textContent;
+  document.querySelector('.form__item_el_about_me').placeholder = document.querySelector('.profile__aboutMe').textContent;
   form.classList.add('js_form_active');
   page.classList.add('page_no_scroll');
 }
@@ -39,7 +39,7 @@ let formElementSaveButton = document.querySelector('.save_button');
 // имя в профиле
 let myName = document.querySelector('.profile__name');
 // обо мне в профиле
-let aboutMe = document.querySelector('.profile__about_me');
+let aboutMe = document.querySelector('.profile__aboutMe');
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (event) {

@@ -1,4 +1,4 @@
-.profile__about_me{
+.profile__aboutMe{
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width:880px) {
-  .profile__about_me{
+  .profile__aboutMe{
     font-size: 14px;
     line-height: 17px;
     max-width: 280px;
