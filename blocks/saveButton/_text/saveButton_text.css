@@ -1,4 +1,4 @@
-.saveButton__text{
+.saveButton_text{
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-weight: normal;
   font-size: 18px;
@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 880px) {
-  .saveButton__text{
+  .saveButton_text{
     font-size: 14px;
     line-height: 17px;
   }
