@@ -1,4 +1,4 @@
-.like_button{
+.likeButton{
   background-image: url(../../images/Vectorlike.svg);
   width: 22px;
   height: 19px;
@@ -8,6 +8,6 @@
   transition: opacity .3s;
 }
 
-.like_button:hover{
+.likeButton:hover{
   opacity: 0.8;
 }
