@@ -1,5 +1,5 @@
-.likeButton__active{
-  background-image: url(../../../images/Union.svg);
+.likeButtonActive{
+  background-image: url(../../images/Union.svg);
   width: 22px;
   height: 19px;
   position: absolute;
