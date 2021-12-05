@@ -47,6 +47,9 @@ function formSubmitHandler (event) {
     //замена данных нановые
     myName.textContent = nameInput.value;
     aboutMe.textContent = aboutMeInput.value;
+    //чтобы очистить поля ввода и при следующем открытии был только плэйсхолдер, а не текст
+    nameInput.value = '';
+    aboutMeInput.value = '';
     //закрыть окнопопап
     form.classList.remove('js_form_active');
     page.classList.remove('page_no_scroll');
