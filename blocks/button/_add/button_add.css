@@ -1,4 +1,4 @@
-.button__add{
+.button_add{
   width: 150px;
   height: 50px;
   background-image: url(../../../images/Vectorsumbol.svg);
@@ -12,16 +12,12 @@
   margin: 0;
   padding: 0;
   transition: opacity .3s;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border: 2px solid #FFFFFF;
   border-radius: 2px;
-  background-color: #000;
-  cursor: pointer;
+
 }
 @media screen and (max-width: 880px) {
-  .button__add{
+  .button_add{
     width: 282px;
     height: 50px;
     background-size: 16px;
@@ -29,6 +25,6 @@
   }
 }
 
-.button__add:hover{
+.button_add:hover{
   opacity: 0.8;
 }

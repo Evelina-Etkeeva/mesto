@@ -1,9 +1,9 @@
 //console.log("hi"); Проверка подключения
-const edit = document.querySelector('.button__edit');
+const edit = document.querySelector('.button_edit');
 // console.log(edit); Выбор кнопки редактировать профиль
 const form = document.querySelector('.popup');
 //console.log(form); Выбор секции с попапом
-const exit = document.querySelector('.button__close');
+const exit = document.querySelector('.button_close');
 //console.log(exit); Выбор кнопки закрыть попап
 
 // форма имя
@@ -11,7 +11,7 @@ const nameInput = document.querySelector('.form__item_el_name');
 // форма обо мне
 const aboutMeInput = document.querySelector('.form__item_el_aboutMe');
 //кнопка
-const formElementSaveButton = document.querySelector('.button__save');
+const formElementSaveButton = document.querySelector('.button_save');
 // имя в профиле
 const myName = document.querySelector('.profile__name');
 // обо мне в профиле
