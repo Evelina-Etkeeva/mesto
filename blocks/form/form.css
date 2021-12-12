@@ -1,14 +1,7 @@
-/*затемнение*/
 .form{
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  display: none;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.js_form_active{
-  display: block;
+  width: 100%;
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border: none;
 }

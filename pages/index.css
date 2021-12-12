@@ -7,14 +7,18 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
 
+@import url(../blocks/button/__add/button__add.css);
+@import url(../blocks/button/__close/button__close.css);
+@import url(../blocks/button/__edit/button__edit.css);
+@import url(../blocks/button/__like/button__like.css);
+@import url(../blocks/button/__save/button__save.css);
+
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__aboutMe/profile__aboutMe.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__img/profile__img.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
-@import url(../blocks/addButton/addButton.css);
-@import url(../blocks/profile/__editBtn/profile__editBtn.css);
 
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/elements/__list/elements__list.css);
@@ -24,21 +28,20 @@
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__title/element__title.css);
 
-@import url(../blocks/likeButton/likeButton.css);
-@import url(../blocks/likeButtonAktive/likeButtonActive.css);
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__rectangle/popup__rectangle.css);
+@import url(../blocks/form/form.css);
+
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__header/form__header.css);
+@import url(../blocks/form/__item/form__item.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 
-@import url(../blocks/form/form.css);
-@import url(../blocks/form/__container/form__container.css);
-@import url(../blocks/form/__header/form__header.css);
-@import url(../blocks/form/__input_container/form__input_container.css);
-@import url(../blocks/form/__item/form__item.css);
 
-@import url(../blocks/closeButton/closeButton.css);
 
-@import url(../blocks/saveButton/saveButton.css);
-@import url(../blocks/saveButton/_text/saveButton_text.css);
+
+
 
 

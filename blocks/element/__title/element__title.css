@@ -4,7 +4,10 @@
   line-height: 29px;
   text-rendering: optimizeLegibility;
   color: black;
-  grid-area: title;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
   justify-self: start;
   max-width: 190px;
   text-overflow: ellipsis;

@@ -9,9 +9,6 @@
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-areas:
-  "image"
-  "title";
   grid-template-rows: 282px 80px;
   justify-content: center;
   align-content: center;

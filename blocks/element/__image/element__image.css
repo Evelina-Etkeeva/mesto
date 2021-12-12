@@ -1,6 +1,9 @@
 .element__image{
   object-fit:cover; /*когда научусь - добавлю возможность пользователю менять формат и позиционирование изображения под квадратные иконки*/
-  grid-area: image;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
   object-position: center;
   display: block;
   height: 282px;

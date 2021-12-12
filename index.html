@@ -22,12 +22,13 @@
         </div>
         <div class="profile__info">
           <h1 class="profile__name">Мое имя-тоже имя</h1>
-          <a class="profile__editBtn" href=""></a>
+          <button type="button" class="button__edit"></button>
+          <!-- поменять в css, настройках ссылки, жабу -->
           <p class="profile__aboutMe">Я не могу больше на это смотреть, теперь ваша очередь.</p>
 
         </div>
 
-          <a class="addButton" href=""></a>
+          <button type="button" class="button__add" ></button>
       </section>
 
       <section class="elements">
@@ -37,18 +38,15 @@
               <img class="element__image" src="./images/Franz-Falckenhaus.jpg" alt="Изображение">
               <h2 class="element__title">Франц Фалькенхаус</h2>
 
-                <a class="likeButton" href=""></a>
-                <a class="likeButtonActive" href=""></a>
-
-            </div>
+                <button type="button" class="button__like"></button>
+              </div>
           </li>
           <li class="element">
               <div class="element__recktangle">
                   <img class="element__image" src="./images/MatthewBiro.jpeg" alt="Изображение">
                 <h2 class="element__title">Мэтью Биро</h2>
 
-                  <a class="likeButton" href=""></a>
-                  <a class="likeButtonActive" href=""></a>
+                <button type="button" class="button__like"></button>
 
               </div>
           </li>
@@ -57,8 +55,7 @@
               <img class="element__image" src="./images/куртШвиттерс.png" alt="Изображение">
               <h2 class="element__title">Курт Швиттерс</h2>
 
-                <a class="likeButton" href=""></a>
-                <a class="likeButtonActive" href=""></a>
+              <button type="button" class="button__like"></button>
 
             </div>
           </li>
@@ -67,8 +64,7 @@
               <img class="element__image" src="./images/моллиСканнел.jpg" alt="Изображение">
               <h2 class="element__title">Молли Сканнел</h2>
 
-                <a class="likeButton" href=""></a>
-                <a class="likeButtonActive" href=""></a>
+              <button type="button" class="button__like"></button>
 
             </div>
           </li>
@@ -77,8 +73,7 @@
               <img class="element__image" src="./images/ПаблоПикассо.jpg" alt="Изображение">
               <h2 class="element__title">Пабло Пикасссо</h2>
 
-                <a class="likeButton" href=""></a>
-                <a class="likeButtonActive" href=""></a>
+              <button type="button" class="button__like"></button>
 
             </div>
           </li>
@@ -87,8 +82,7 @@
                 <img class="element__image" src="./images/сергейНехаев.jpg" alt="Изображение">
               <h2 class="element__title">Сергей Нихаев</h2>
 
-                <a class="likeButton" href=""></a>
-                <a class="likeButtonActive" href=""></a>
+              <button type="button" class="button__like"></button>
 
             </div>
           </li>
@@ -96,17 +90,15 @@
 
       </section>
 
-      <section class="form">
-        <div class="form__container">
-          <a class="closeButton" href=""></a>
-
-          <fieldset class="form__input-container form__input-container_ctrl_texts">
-            <h2 class="form__header">Редактировать профиль</h2>
-            <input type="text" class="form__item form__item_el_name" id="el_name" name="el_name" placeholder="Имя" maxlength='50' required>
-            <textarea class="form__item form__item_el_aboutMe" id="about_me" name="about_me" placeholder="О себе" maxlength='500'  required></textarea>  <!--rows="1" чтобы совпала высота с макетом, но так неудобно-->
-            <input type="submit" class="saveButton saveButton_text" value="Сохранить">
-          </fieldset>
-
+      <section class="popup">
+        <div class="popup__rectangle">
+            <button type="button" class="button__close" ></button>
+            <fieldset class="form">
+              <h2 class="form__header">Редактировать профиль</h2>
+              <input type="text" class="form__item form__item_el_name" id="el_name" name="el_name" placeholder="Имя" maxlength='50' required>
+              <input type="text" class="form__item form__item_el_aboutMe" id="about_me" name="about_me" placeholder="О себе" maxlength='500'  required>  <!--rows="1" чтобы совпала высота с макетом, но так неудобно-->
+              <button type="submit" class="button__save" value="Сохранить">Сохранить</button>
+            </fieldset>
         </div>
 
       </section>
@@ -116,6 +108,6 @@
       <p class="footer__copyright" lang="en">© 2021. Mesto Russia</p>
     </footer>
   </div>
-  <script src="./script.js"></script>
+  <script src="./script/script.js"></script>
 </body>
 </html>

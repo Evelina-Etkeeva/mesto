@@ -1,8 +1,7 @@
-.addButton{
-  border: 1px solid #FFFFFF;
+.button__add{
   width: 150px;
   height: 50px;
-  background-image: url(../../images/Vectorsumbol.svg);
+  background-image: url(../../../images/Vectorsumbol.svg);
   background-position: center;
   background-size: 22px;
   background-repeat: no-repeat;
@@ -13,9 +12,16 @@
   margin: 0;
   padding: 0;
   transition: opacity .3s;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
+  background-color: #000;
+  cursor: pointer;
 }
 @media screen and (max-width: 880px) {
-  .addButton{
+  .button__add{
     width: 282px;
     height: 50px;
     background-size: 16px;
@@ -23,6 +29,6 @@
   }
 }
 
-.addButton:hover{
+.button__add:hover{
   opacity: 0.8;
 }
