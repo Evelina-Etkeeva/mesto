@@ -1,4 +1,4 @@
-.profile__aboutMe{
+.profile__about-me{
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
@@ -11,13 +11,17 @@
   max-width: 520px;
   text-rendering: optimizeLegibility;
   align-self: baseline;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width:880px) {
-  .profile__aboutMe{
+  .profile__about-me{
     font-size: 14px;
     line-height: 17px;
     max-width: 280px;
     justify-self: center;
+    align-self: center;
   }
 }

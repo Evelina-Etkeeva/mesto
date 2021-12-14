@@ -1,27 +1,30 @@
-.button_edit{
+.button_type_edit{
   border: 1px solid #FFFFFF;
   width: 24px;
   height: 24px;
-  background-image: url(../../../images/edit_button.svg);
+  background-image: url(../../../../images/edit_button.svg);
   background-position: center;
   background-size: 10px;
   background-repeat: no-repeat;
   grid-area: edit;
-  margin: 0;
+  margin: 0 -42px 0 0;
   padding: 0;
   align-self: baseline;
   box-sizing: border-box;
   transition: opacity .3s;
+  justify-self: start;
 }
+
 @media screen and (max-width: 880px) {
-  .button_edit{
+  .button_type_edit{
     width: 18px;
     height: 18px;
     background-size: 8px;
-    justify-self: end;
+    margin: 0 0 0 0;
+    justify-self: start;
   }
 }
 
-.button_edit:hover{
-  opacity: 0.8;
+.button_type_edit:hover{
+  opacity: 0.6;
 }

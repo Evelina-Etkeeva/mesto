@@ -1,7 +1,7 @@
-.button_add{
+.button_type_add{
   width: 150px;
   height: 50px;
-  background-image: url(../../../images/Vectorsumbol.svg);
+  background-image: url(../../../../images/vectorsumbol.svg);
   background-position: center;
   background-size: 22px;
   background-repeat: no-repeat;
@@ -17,7 +17,7 @@
 
 }
 @media screen and (max-width: 880px) {
-  .button_add{
+  .button_type_add{
     width: 282px;
     height: 50px;
     background-size: 16px;
@@ -25,6 +25,6 @@
   }
 }
 
-.button_add:hover{
-  opacity: 0.8;
+.button_type_add:hover{
+  opacity: 0.6;
 }

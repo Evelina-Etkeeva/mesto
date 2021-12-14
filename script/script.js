@@ -1,40 +1,37 @@
 //console.log("hi"); Проверка подключения
-const edit = document.querySelector('.button_edit');
+const edit = document.querySelector('.button_type_edit');
 // console.log(edit); Выбор кнопки редактировать профиль
-const form = document.querySelector('.popup');
-//console.log(form); Выбор секции с попапом
-const exit = document.querySelector('.button_close');
+const popup = document.querySelector('.popup');
+
+const exit = document.querySelector('.button_type_close');
 //console.log(exit); Выбор кнопки закрыть попап
+
+const form = document.querySelector('.form');
 
 // форма имя
 const nameInput = document.querySelector('.form__item_el_name');
 // форма обо мне
-const aboutMeInput = document.querySelector('.form__item_el_aboutMe');
-//кнопка
-const formElementSaveButton = document.querySelector('.button_save');
+const aboutMeInput = document.querySelector('.form__item_el_about-me');
 // имя в профиле
 const myName = document.querySelector('.profile__name');
 // обо мне в профиле
-const aboutMe = document.querySelector('.profile__aboutMe');
+const aboutMe = document.querySelector('.profile__about-me');
 
 
 
 //открытие формы с отключением скролла
-function open_popup (event) {
-  event.preventDefault();
-  //плейсхолдер = данным на странице
+function openPopup () {
   nameInput.value = myName.textContent;
   aboutMeInput.value = aboutMe.textContent;
-  form.classList.add('popup_active');
+  popup.classList.add('popup_active');
 }
 //закрытие формы без сохранения
-function close_popup (event) {
-  event.preventDefault();
-  form.classList.remove('popup_active');
+function closePopup () {
+  popup.classList.remove('popup_active');
 }
 //вызов по клику
-edit.addEventListener('click', open_popup);
-exit.addEventListener('click', close_popup);
+edit.addEventListener('click', openPopup);
+exit.addEventListener('click', closePopup);
 
 
 
@@ -46,8 +43,8 @@ function formSubmitHandler (event) {
     myName.textContent = nameInput.value;
     aboutMe.textContent = aboutMeInput.value;
     //закрыть окнопопап
-    form.classList.remove('popup_active');
+    closePopup();
 }
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка» Почему-то на субмит страница не реагирует, а с кликом все работает
-formElementSaveButton.addEventListener('click', formSubmitHandler);
+form.addEventListener('submit', formSubmitHandler);

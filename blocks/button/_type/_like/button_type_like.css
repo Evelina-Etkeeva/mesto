@@ -1,5 +1,5 @@
-.button_like{
-  background-image: url(../../../images/Vectorlike.svg);
+.button_type_like{
+  background-image: url(../../../../images/vectorlike.svg);
   background-position: center;
   background-size: cover;
   width: 22px;
@@ -16,6 +16,6 @@
   padding: 0;
 }
 
-.button_like:hover{
-  opacity: 0.8;
+.button_type_like:hover{
+  opacity: 0.6;
 }
