@@ -19,43 +19,43 @@
           <img class="profile__img" src="./images/ava.jpeg" alt="это ваше лицо" />
           <div class="profile__info">
             <h1 class="profile__name">Мое имя-тоже имя</h1>
-            <button type="button" aria-label="edit" class="button button_type_edit"></button>
+            <button type="button" aria-label="edit" class="button button_type_edit profile__edit-btn"></button>
             <!-- поменять в css, настройках ссылки, жабу -->
             <p class="profile__about-me">Я не могу больше на это смотреть, теперь ваша очередь.</p>
           </div>
-          <button type="button" aria-label="add" class="button button_type_add"></button>
+          <button type="button" aria-label="add" class="button button_type_add profile__add-btn"></button>
         </section>
         <section class="elements">
           <ul class="elements__list">
             <li class="element">
               <img class="element__image" src="./images/franz-falckenhaus.jpg" alt="Изображение" />
               <h2 class="element__title">Франц Фалькенхаус</h2>
-              <button type="button" aria-label="like" class="button button_type_like"></button>
+              <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
             </li>
             <li class="element">
               <img class="element__image" src="./images/matthew_biro.jpeg" alt="Изображение" />
               <h2 class="element__title">Мэтью Биро</h2>
-              <button type="button" aria-label="like" class="button button_type_like"></button>
+              <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
             </li>
             <li class="element">
               <img class="element__image" src="./images/kurt_shwitters.png" alt="Изображение" />
               <h2 class="element__title">Курт Швиттерс</h2>
-              <button type="button" aria-label="like" class="button button_type_like"></button>
+              <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
             </li>
             <li class="element">
               <img class="element__image" src="./images/molly_scanner.jpg" alt="Изображение" />
               <h2 class="element__title">Молли Сканнел</h2>
-              <button type="button" aria-label="like" class="button button_type_like"></button>
+              <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
             </li>
             <li class="element">
               <img class="element__image" src="./images/pablo_picasso.jpg" alt="Изображение" />
               <h2 class="element__title">Пабло Пикасссо</h2>
-              <button type="button" aria-label="like" class="button button_type_like"></button>
+              <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
             </li>
             <li class="element">
               <img class="element__image" src="./images/sergey_nihaev.jpg" alt="Изображение" />
               <h2 class="element__title">Сергей Нихаев</h2>
-              <button type="button" aria-label="like" class="button button_type_like"></button>
+              <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
             </li>
           </ul>
         </section>
@@ -66,12 +66,12 @@
       </footer>
       <div class="popup">
         <div class="popup__container">
-          <button type="button" aria-label="close" class="button button_type_close"></button>
+          <button type="button" aria-label="close" class="button button_type_close popup__close-btn"></button>
           <form class="form">
             <h2 class="form__header">Редактировать профиль</h2>
             <input type="text" class="form__item form__item_el_name" id="el_name" name="el_name" placeholder="Имя" maxlength="20" required />
             <input type="text" class="form__item form__item_el_about-me" id="about_me" name="about_me" placeholder="О себе" maxlength="55" required />
-            <button type="submit" class="button button_type_save" value="Сохранить">Сохранить</button>
+            <button type="submit" class="button button_type_save popup__save-btn" value="Сохранить">Сохранить</button>
           </form>
         </div>
       </div>

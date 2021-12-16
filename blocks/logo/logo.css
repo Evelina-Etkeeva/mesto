@@ -5,6 +5,8 @@
 }
 @media screen and (max-width: 900px) {
   .logo{
-    margin: 28px 0 32px 28px; /*надеюсь, мое своевольное изменение отступов на прау пикселей не критично*/
+    margin: 28px 0 32px 28px;
+    width: 104px;
+    height: 24px;
   }
 }
