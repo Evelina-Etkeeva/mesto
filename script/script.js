@@ -48,3 +48,53 @@ function formSubmitHandler (event) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка» Почему-то на субмит страница не реагирует, а с кликом все работает
 form.addEventListener('submit', formSubmitHandler);
+
+const addBtn = document.querySelector('.button_type_add');
+// console.log(addBtn);
+const elementTemplate = document.querySelector('.elemet-template');
+// console.log(elementTemplate);
+const elementsList = document.querySelector('.elements__list');
+// console.log(elementsList);
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+
+// шесть карточек "из коробки"
+  function defaultLayout(list) {
+
+    // console.log(newElement);
+    // console.log(initialCards[0].name);
+    for(let i=0; i<list.length; i=i+1){
+      const newElement = elementTemplate.content.cloneNode(true).querySelector('.element');
+      newElement.querySelector('.element__title').textContent = list[i].name;
+      newElement.querySelector('.element__image').src = list[i].link;
+      elementsList.append(newElement);
+    }
+  }
+
+defaultLayout(initialCards)
