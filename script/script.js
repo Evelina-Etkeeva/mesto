@@ -1,6 +1,6 @@
 
 //балванка для карточки
-const elementTemplate = document.querySelector('.elemet-template');
+const elementTemplate = document.querySelector('.element-template');
 // console.log(elementTemplate);
 //список для карточек
 const elementsList = document.querySelector('.elements__list');
