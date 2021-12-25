@@ -58,11 +58,19 @@
           </form>
         </div>
       </div>
+      <div class="image-popup">
+        <div class="image-popup__content">
+          <img class="image-popup__img" src="" alt="Изображение">
+          <span class="image-popup__title"></span>
+          <button type="button" aria-label="close" class="button button_type_close image-popup__close-btn"></button>
+        </div>
+      </div>
       <template class="elemet-template">
         <li class="element">
-          <img class="element__image" src="" alt="Изображение" />
+          <img class="element__image" src="" alt="Изображение">
           <h2 class="element__title"></h2>
           <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
+          <button type="button" aria-label="delete" class="button button_type_delete element__delete-btn"></button>
         </li>
       </template>
     </div>

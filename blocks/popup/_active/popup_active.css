@@ -1,5 +1,6 @@
 .popup_active{
-  display: flex;
   justify-items: center;
   align-content: center;
+  visibility: visible;
+  opacity: 1;
 }
