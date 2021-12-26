@@ -1,5 +1,5 @@
 /*белый прямоугольник*/
-.popup__container{
+.popup__forms-container{
   /* min-height: 330px; */
   min-width: 430px;
   padding: 36px; /*усреднила значения из макета*/
@@ -13,7 +13,7 @@
 }
 
 @media screen and (max-width: 880px) {
-  .popup__container{
+  .popup__forms-container{
     min-width: 282px;
     /* min-height: 322px; */
     padding: 25px 22px;
