@@ -7,33 +7,10 @@ const elementsList = document.querySelector('.elements__list');
 // console.log(elementsList);
 //окно для добавления новых картинок
 
-//шесть карточек"из коробки"
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const imagePopupCloseBtn = document.querySelector('.image-popup__close-btn');
+imagePopupCloseBtn.addEventListener('click', closeImagePopup);
+
+
 
 const edit = document.querySelector('.button_type_edit');
 // console.log(edit); Выбор кнопки редактировать профиль
@@ -50,6 +27,12 @@ const aboutMeInput = document.querySelector('.form__item_el_about-me');
 const myName = document.querySelector('.profile__name');
 // обо мне в профиле
 const aboutMe = document.querySelector('.profile__about-me');
+const popupAddCard = document.querySelector('.popup_content_add-card');//попап для добавления новой карточки
+const closeAddCard = popupAddCard.querySelector('.button_type_close');//кнопка закрыть окно добавления новых картинок
+const formAddCard = document.querySelector('.form_content_add-card');// форма с добавлением новой картинки
+const placeNameInput = document.querySelector('.form__item_el_place-name');//форма с названием карточки
+const placeImgInput = document.querySelector('.form__item_el_place-img');//форма с ссылкой на картинку
+const addButton = document.querySelector('.button_type_add'); //кнопка добавить карточки
 
 
 //открытие формы редактирования профиля
@@ -64,9 +47,7 @@ function closePopupEditProfile () {
   popupEditProfile.classList.remove('popup_active');
 }
 
-//вызов по клику
-edit.addEventListener('click', openPopupEditProfile);
-closeEditProfile.addEventListener('click', closePopupEditProfile);
+
 
 
 // Обработчик «отправки» формы, хотя пока
@@ -79,9 +60,7 @@ function formSubmitHandler (event) {
     //закрыть окнопопап
     closePopupEditProfile();
 }
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка» Почему-то на субмит страница не реагирует, а с кликом все работает
-formEditProfile.addEventListener('submit', formSubmitHandler);
+
 
 
 function addLike(event){
@@ -120,14 +99,8 @@ function defaultLayout(list) {
   }
 }
 
-defaultLayout(initialCards);
+
 //открытие формы добавления картинки
-const popupAddCard = document.querySelector('.popup_content_add-card');//попап для добавления новой карточки
-const closeAddCard = popupAddCard.querySelector('.button_type_close');//кнопка закрыть окно добавления новых картинок
-const formAddCard = document.querySelector('.form_content_add-card');// форма с добавлением новой картинки
-const placeNameInput = document.querySelector('.form__item_el_place-name');//форма с названием карточки
-const placeImgInput = document.querySelector('.form__item_el_place-img');//форма с ссылкой на картинку
-const addButton = document.querySelector('.button_type_add'); //кнопка добавить карточки
 
 function openPopupAddCard () {
   popupAddCard.classList.add('popup_active');
@@ -138,9 +111,6 @@ function openPopupAddCard () {
 function closePopupAddCard () {
   popupAddCard.classList.remove('popup_active');
 }
-//вызов по клику
-addButton.addEventListener('click', openPopupAddCard);
-closeAddCard.addEventListener('click', closePopupAddCard);
 
 
 function addPlaceSubmitHandler (event) {
@@ -164,9 +134,16 @@ function addPlaceSubmitHandler (event) {
 }
 
 formAddCard.addEventListener('submit', addPlaceSubmitHandler);
-
-const imagePopupCloseBtn = document.querySelector('.image-popup__close-btn');
-imagePopupCloseBtn.addEventListener('click', closeImagePopup);
+//вызов по клику
+addButton.addEventListener('click', openPopupAddCard);
+closeAddCard.addEventListener('click', closePopupAddCard);
+defaultLayout(initialCards);
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка» Почему-то на субмит страница не реагирует, а с кликом все работает
+formEditProfile.addEventListener('submit', formSubmitHandler);
+//вызов по клику
+edit.addEventListener('click', openPopupEditProfile);
+closeEditProfile.addEventListener('click', closePopupEditProfile);
 
 
 
