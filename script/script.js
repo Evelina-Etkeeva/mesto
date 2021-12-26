@@ -73,18 +73,6 @@ function handleEditProfileFormSubmit (event) {
     //закрыть окнопопап
     closePopup(popupEditProfile);
 }
-
-// функция, добавляющая карточки из попапа
-function handleAddCardSubmit (event) {
-  event.preventDefault();
-  //замена данных на новые
-  getCardElement(placeNameInput.value, placeImgInput.value);
-  placeNameInput.value ='';
-  placeImgInput.value = '';
-  //закрыть окнопопап
-   closePopupAddCard();
-}
-
 // лайк
 function addLike(event){
   event.target.classList.toggle('active');
@@ -93,23 +81,31 @@ function addLike(event){
 function deleteElement(event){
   event.target.closest('.element').remove();
 }
-
 // функция создающая карточки из балванки, сразу добавляет обработчик на кнопки лайк, открыть на весь экран и удалить
 function getCardElement(name, link) {
-    const newCardElement = elementTemplate.content.cloneNode(true).querySelector('.element');
-    newCardElement.querySelector('.element__title').textContent = name;
-    newCardElement.querySelector('.element__image').src = link;
-    newCardElement.querySelector('.element__image').alt = altText;
-    const newCardLikeButton = newCardElement.querySelector('.button_type_like');
-    newCardLikeButton.addEventListener('click', addLike);
-    const newCardDeleteButton = newCardElement.querySelector('.button_type_delete');
-    newCardDeleteButton.addEventListener('click', deleteElement);
-    const newCardImageButton = newCardElement.querySelector('.element__image');
-    newCardImageButton.addEventListener('click', () => openImagePopup(name, link));
-    elementsList.prepend(newCardElement);
-    return newCardElement;
+  const newCardElement = elementTemplate.content.cloneNode(true).querySelector('.element');
+  newCardElement.querySelector('.element__title').textContent = name;
+  newCardElement.querySelector('.element__image').src = link;
+  newCardElement.querySelector('.element__image').alt = altText;
+  const newCardLikeButton = newCardElement.querySelector('.button_type_like');
+  newCardLikeButton.addEventListener('click', addLike);
+  const newCardDeleteButton = newCardElement.querySelector('.button_type_delete');
+  newCardDeleteButton.addEventListener('click', deleteElement);
+  const newCardImageButton = newCardElement.querySelector('.element__image');
+  newCardImageButton.addEventListener('click', () => openImagePopup(name, link));
+  elementsList.prepend(newCardElement);
+  return newCardElement;
 }
-
+// функция, добавляющая карточки из попапа
+function handleAddCardSubmit (event) {
+  event.preventDefault();
+  //замена данных на новые
+  getCardElement(placeNameInput.value, placeImgInput.value);
+  placeNameInput.value ='';
+  placeImgInput.value = '';
+  //закрыть окнопопап
+  closePopupAddCard();
+}
 // сохранение новой карточки
 formAddCard.addEventListener('submit', handleAddCardSubmit);
 //открыть попап добавление новых картинок
@@ -118,8 +114,7 @@ openAddCard.addEventListener('click', openPopupAddCard);
 closeAddCard.addEventListener('click', closePopupAddCard);
 // карточки по умолчанию
 initialCards.forEach(data => {
-  const newCard = getCardElement(data.name, data.link);
-  elementsList.prepend(newCard);
+  getCardElement(data.name, data.link);
 });
 // Обновление информации профиля
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
@@ -129,7 +124,6 @@ openEditProfile.addEventListener('click', openPopupEditProfile);
 closeEditProfile.addEventListener('click', closePopupEditProfile);
 // закрыть картинку на весь экран
 imagePopupCloseBtn.addEventListener('click', closeImagePopup);
-
 
 
 
