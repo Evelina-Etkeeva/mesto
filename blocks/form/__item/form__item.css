@@ -55,3 +55,21 @@
   }
 
 }
+
+.form__item-error{
+  border-bottom: 1px solid red;
+}
+.place-name-error{
+  display: none;
+}
+
+.form__error_active{
+  color: red;
+  font-size: 12px;
+  line-height: 15px;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  display: inline;
+  font-style: normal;
+  font-weight: normal;
+  max-width: 358px;
+}

@@ -106,6 +106,12 @@ function handleAddCardSubmit (event) {
   //закрыть окнопопап
   closePopupAddCard();
 }
+
+
+
+
+
+
 // сохранение новой карточки
 formAddCard.addEventListener('submit', handleAddCardSubmit);
 //открыть попап добавление новых картинок

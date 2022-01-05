@@ -40,10 +40,12 @@
       <div class="popup popup_content_edit-profile">
         <div class="popup__forms-container">
           <button type="button" aria-label="close" class="button button_type_close popup__close-btn"></button>
-          <form class="form form_content_edit-profile" name="profile-input">
+          <form class="form form_content_edit-profile" name="profile-input" novalidate>
             <h2 class="form__header">Редактировать профиль</h2>
-            <input type="text" class="form__item form__item_el_name" id="el_name" name="el_name" placeholder="Имя" maxlength="20" required />
-            <input type="text" class="form__item form__item_el_about-me" id="about_me" name="about_me" placeholder="О себе" maxlength="55" required />
+            <input type="text" class="form__item form__item_el_name" id="el_name" name="el_name" placeholder="Имя" minlength="2" maxlength="40" required />
+            <span class="form__span el_name-error"></span>
+            <input type="text" class="form__item form__item_el_about-me" id="about_me" name="about_me" placeholder="О себе" minlength="2" maxlength="200" required />
+            <span class="form__span about_me-error"></span>
             <button type="submit" class="button button_type_save popup__save-btn" value="Сохранить">Сохранить</button>
           </form>
         </div>
@@ -51,10 +53,12 @@
       <div class="popup popup_content_add-card">
         <div class="popup__forms-container">
           <button type="button" aria-label="close" class="button button_type_close popup__close-btn"></button>
-          <form class="form form_content_add-card" name="new-card-input">
+          <form class="form form_content_add-card" name="new-card-input" novalidate>
             <h2 class="form__header">Новое место</h2>
-            <input type="text" class="form__item form__item_el_place-name" id="place-name" name="place-name" placeholder="Название" required />
+            <input type="text" class="form__item form__item_el_place-name" id="place-name" name="place-name" placeholder="Название" minlength="2" maxlength="30" required />
+            <span class="place-name-error form__span"></span>
             <input type="url" class="form__item form__item_el_place-img" id="place-img" name="place-img" placeholder="Ссылка на картинку" required />
+            <span class="place-img-error form__span"></span>
             <button type="submit" class="button button_type_save popup__save-btn" value="Сохранить">Сохранить</button>
           </form>
         </div>
@@ -77,5 +81,6 @@
     </div>
     <script src="./initial cards/cards.js"></script>
     <script src="./script/script.js"></script>
+    <script src="./script/validation.js"></script>
   </body>
 </html>
