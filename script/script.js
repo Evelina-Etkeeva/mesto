@@ -109,8 +109,13 @@ function handleAddCardSubmit (event) {
 
 
 
-
-
+//коряво, но все работает
+document.addEventListener('keydown', function(event){
+  if(event.key === 'Escape'){
+    closePopup(popupEditProfile);
+    closePopup(popupAddCard);
+  }
+});
 
 // сохранение новой карточки
 formAddCard.addEventListener('submit', handleAddCardSubmit);
