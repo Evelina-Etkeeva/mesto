@@ -3,14 +3,14 @@ const showFormInputError = (formElement, inputElement, errorMessage, set) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   //console.log(`.${inputElement.id}-error`);
   inputElement.classList.add(set.inputErrorClass);
-  errorElement.classList.add(set.inputErrorClass);
+  errorElement.classList.add(set.errorClass);
   errorElement.textContent = errorMessage;
 };
 //функция, удаляющая класс со стилями ошибки ввода
 const hideFormInputError = (formElement, inputElement, set) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(set.inputErrorClass);
-  errorElement.classList.remove(set.inputErrorClass);
+  errorElement.classList.remove(set.errorClass);
   errorElement.textContent = '';
 };
 
@@ -105,7 +105,7 @@ enableValidation({
   inputSelector:  '.form__item',
   submitButtonSelector: '.popup__save-btn',
   inactiveButtonClass: 'popup__save-btn_inactive',
-  inputErrorClass: '.form__item-error',
-  errorClass: '.form__error_active'
+  inputErrorClass: 'form__item-error',
+  errorClass: 'form__error_active'
 });
 
