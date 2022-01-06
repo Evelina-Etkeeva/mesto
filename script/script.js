@@ -52,6 +52,8 @@ function openPopupEditProfile () {
 //закрытие формы редактирования профиля без сохранения
 function closePopupEditProfile () {
   closePopup(popupEditProfile);
+  nameInput.value = myName.textContent;
+  aboutMeInput.value = aboutMe.textContent;
 }
 
 //открытие формы добавления картинки
@@ -62,6 +64,8 @@ function openPopupAddCard () {
 //закрытие формы добавления картинки без сохранения
 function closePopupAddCard () {
   closePopup(popupAddCard);
+  popupImg.src = '';
+  popupTitle.textContent = '';
 }
 
 // функция, сохраняющая новую информацию в профиль
@@ -96,6 +100,7 @@ function getCardElement(name, link) {
   elementsList.prepend(newCardElement);
   return newCardElement;
 }
+
 // функция, добавляющая карточки из попапа
 function handleAddCardSubmit (event) {
   event.preventDefault();
@@ -103,19 +108,34 @@ function handleAddCardSubmit (event) {
   getCardElement(placeNameInput.value, placeImgInput.value);
   placeNameInput.value ='';
   placeImgInput.value = '';
+
   //закрыть окнопопап
   closePopupAddCard();
 }
 
+function closeOnOverlay (event) {
+  if(event.target === event.currentTarget && event.target.classList.contains('popup_content_edit-profile')){//
+  closePopupEditProfile();
+} else if (event.target === event.currentTarget && event.target.classList.contains('popup_content_add-card')){ //
+  closePopupAddCard();
+}
+}
 
 
-//коряво, но все работает
+
 document.addEventListener('keydown', function(event){
-  if(event.key === 'Escape'){
-    closePopup(popupEditProfile);
-    closePopup(popupAddCard);
+  if(event.key === 'Escape' && popupEditProfile.classList.contains('popup_active')){
+    closePopupEditProfile ();
+  } else if (event.key === 'Escape' && popupAddCard.classList.contains('popup_active')){
+    closePopupAddCard();
   }
 });
+
+popupEditProfile.addEventListener('click', closeOnOverlay);
+
+popupAddCard.addEventListener('click', closeOnOverlay);
+
+
 
 // сохранение новой карточки
 formAddCard.addEventListener('submit', handleAddCardSubmit);
