@@ -62,8 +62,8 @@ function openPopupEditProfile () {
   popupSaveBtn.classList.add('popup__save-btn_inactive');
   popupSaveBtn.setAttribute('disabled','disabled')
   openPopup(popupEditProfile);
-
 }
+
 //закрытие формы редактирования профиля без сохранения
 function closePopupEditProfile () {
   closePopup(popupEditProfile);
@@ -131,7 +131,7 @@ function handleAddCardSubmit (event) {
   //закрыть окнопопап
   closePopupAddCard();
 }
-
+//закрытие кликом на оверлей или кнопку
 popupEditProfile.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
     closePopup(popupEditProfile);
@@ -149,36 +149,11 @@ imagePopup.addEventListener('click', (evt) => {
     closeImagePopup(imagePopup);
   }
 });
-// function closeOnOverlay (event) {
-//   if(event.target === event.currentTarget && event.target.classList.contains('popup_content_edit-profile')){//
-//   closePopupEditProfile();
-// } else if (event.target === event.currentTarget && event.target.classList.contains('popup_content_add-card')){ //
-//   closePopupAddCard();
-// }
-// }
-
-
-
-// document.addEventListener('keydown', function(event){
-//   if(event.key === 'Escape' && popupEditProfile.classList.contains('popup_active')){
-//     closePopupEditProfile ();
-//   } else if (event.key === 'Escape' && popupAddCard.classList.contains('popup_active')){
-//     closePopupAddCard();
-//   }
-// });
-
-// popupEditProfile.addEventListener('click', closeOnOverlay);
-
-// popupAddCard.addEventListener('click', closeOnOverlay);
-
-
 
 // сохранение новой карточки
 formAddCard.addEventListener('submit', handleAddCardSubmit);
 //открыть попап добавление новых картинок
 openAddCard.addEventListener('click', openPopupAddCard);
-// закрыть попап добавление новых картинок
-// closeAddCard.addEventListener('click', closePopupAddCard);
 // карточки по умолчанию
 initialCards.forEach(data => {
   getCardElement(data.name, data.link);
@@ -187,10 +162,5 @@ initialCards.forEach(data => {
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 // открыть попап редактирования профиля
 openEditProfile.addEventListener('click', openPopupEditProfile);
-// закрыть попап редактирования профиля
-// closeEditProfile.addEventListener('click', closePopupEditProfile);
-// закрыть картинку на весь экран
-//imagePopupCloseBtn.addEventListener('click', closeImagePopup);
-
 
 
