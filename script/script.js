@@ -19,15 +19,26 @@ const openAddCard = document.querySelector('.button_type_add'); //кнопка �
 const popupImg = document.querySelector('.popup__img'); // картинка на весь экран
 const popupTitle = document.querySelector('.popup__title'); // подпись под картинками на весь экран
 const altText = 'изображение'; // все картинки - это изображения
+//const popupSaveBtn = document.querySelector('.popup__save-btn');
 
 //открытие попапа
+function closeOnEscape(event, popup){
+  if(event.key === 'Escape'){
+    closePopup(popup);
+  }
+}
 function openPopup(popup){
   popup.classList.add('popup_active');
+  document.addEventListener('keydown', function(event){
+    closeOnEscape(event, popup)
+  }) //как передать функции ивент
+
 }
 
 // закрытие попапа
 function closePopup(popup){
   popup.classList.remove('popup_active');
+  document.removeEventListener('keydown', closeOnEscape)
 }
 
 // открыть картинку на весь экран
@@ -47,7 +58,11 @@ function closeImagePopup(){
 function openPopupEditProfile () {
   nameInput.value = myName.textContent;
   aboutMeInput.value = aboutMe.textContent;
+  popupSaveBtn = popupEditProfile.querySelector('.popup__save-btn');
+  popupSaveBtn.classList.add('popup__save-btn_inactive');
+  popupSaveBtn.setAttribute('disabled','disabled')
   openPopup(popupEditProfile);
+
 }
 //закрытие формы редактирования профиля без сохранения
 function closePopupEditProfile () {
@@ -58,14 +73,16 @@ function closePopupEditProfile () {
 
 //открытие формы добавления картинки
 function openPopupAddCard () {
+  popupSaveBtn = popupAddCard.querySelector('.popup__save-btn');
+  popupSaveBtn.classList.add('popup__save-btn_inactive');
+  popupSaveBtn.setAttribute('disabled','disabled')
   openPopup(popupAddCard);
 }
 
 //закрытие формы добавления картинки без сохранения
 function closePopupAddCard () {
   closePopup(popupAddCard);
-  popupImg.src = '';
-  popupTitle.textContent = '';
+  formAddCard.reset();
 }
 
 // функция, сохраняющая новую информацию в профиль
@@ -85,6 +102,10 @@ function addLike(event){
 function deleteElement(event){
   event.target.closest('.element').remove();
 }
+
+function renderCard (cardElement){
+  elementsList.prepend(cardElement);
+}
 // функция создающая карточки из балванки, сразу добавляет обработчик на кнопки лайк, открыть на весь экран и удалить
 function getCardElement(name, link) {
   const newCardElement = elementTemplate.content.cloneNode(true).querySelector('.element');
@@ -97,8 +118,7 @@ function getCardElement(name, link) {
   newCardDeleteButton.addEventListener('click', deleteElement);
   const newCardImageButton = newCardElement.querySelector('.element__image');
   newCardImageButton.addEventListener('click', () => openImagePopup(name, link));
-  elementsList.prepend(newCardElement);
-  return newCardElement;
+  renderCard(newCardElement)
 }
 
 // функция, добавляющая карточки из попапа
@@ -106,34 +126,50 @@ function handleAddCardSubmit (event) {
   event.preventDefault();
   //замена данных на новые
   getCardElement(placeNameInput.value, placeImgInput.value);
-  placeNameInput.value ='';
-  placeImgInput.value = '';
+  formAddCard.reset();
 
   //закрыть окнопопап
   closePopupAddCard();
 }
 
-function closeOnOverlay (event) {
-  if(event.target === event.currentTarget && event.target.classList.contains('popup_content_edit-profile')){//
-  closePopupEditProfile();
-} else if (event.target === event.currentTarget && event.target.classList.contains('popup_content_add-card')){ //
-  closePopupAddCard();
-}
-}
-
-
-
-document.addEventListener('keydown', function(event){
-  if(event.key === 'Escape' && popupEditProfile.classList.contains('popup_active')){
-    closePopupEditProfile ();
-  } else if (event.key === 'Escape' && popupAddCard.classList.contains('popup_active')){
-    closePopupAddCard();
+popupEditProfile.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
+    closePopup(popupEditProfile);
   }
 });
 
-popupEditProfile.addEventListener('click', closeOnOverlay);
+popupAddCard.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
+    closePopup(popupAddCard);
+  }
+});
 
-popupAddCard.addEventListener('click', closeOnOverlay);
+imagePopup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
+    closeImagePopup(imagePopup);
+  }
+});
+// function closeOnOverlay (event) {
+//   if(event.target === event.currentTarget && event.target.classList.contains('popup_content_edit-profile')){//
+//   closePopupEditProfile();
+// } else if (event.target === event.currentTarget && event.target.classList.contains('popup_content_add-card')){ //
+//   closePopupAddCard();
+// }
+// }
+
+
+
+// document.addEventListener('keydown', function(event){
+//   if(event.key === 'Escape' && popupEditProfile.classList.contains('popup_active')){
+//     closePopupEditProfile ();
+//   } else if (event.key === 'Escape' && popupAddCard.classList.contains('popup_active')){
+//     closePopupAddCard();
+//   }
+// });
+
+// popupEditProfile.addEventListener('click', closeOnOverlay);
+
+// popupAddCard.addEventListener('click', closeOnOverlay);
 
 
 
@@ -142,7 +178,7 @@ formAddCard.addEventListener('submit', handleAddCardSubmit);
 //открыть попап добавление новых картинок
 openAddCard.addEventListener('click', openPopupAddCard);
 // закрыть попап добавление новых картинок
-closeAddCard.addEventListener('click', closePopupAddCard);
+// closeAddCard.addEventListener('click', closePopupAddCard);
 // карточки по умолчанию
 initialCards.forEach(data => {
   getCardElement(data.name, data.link);
@@ -152,9 +188,9 @@ formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 // открыть попап редактирования профиля
 openEditProfile.addEventListener('click', openPopupEditProfile);
 // закрыть попап редактирования профиля
-closeEditProfile.addEventListener('click', closePopupEditProfile);
+// closeEditProfile.addEventListener('click', closePopupEditProfile);
 // закрыть картинку на весь экран
-imagePopupCloseBtn.addEventListener('click', closeImagePopup);
+//imagePopupCloseBtn.addEventListener('click', closeImagePopup);
 
 
 

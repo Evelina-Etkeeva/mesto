@@ -1,7 +1,6 @@
 //функция, добавляющая класс со стилями ошибки ввода
 const showFormInputError = (formElement, inputElement, errorMessage, set) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  //console.log(`.${inputElement.id}-error`);
   inputElement.classList.add(set.inputErrorClass);
   errorElement.classList.add(set.errorClass);
   errorElement.textContent = errorMessage;
@@ -17,9 +16,8 @@ const hideFormInputError = (formElement, inputElement, set) => {
 
 
 // Функция, которая проверяет валидность поля
-const isValid = (formElement, inputElement, set) => {
- //console.log(inputElement);
- showFormInputError(formElement, inputElement, inputElement.validationMessage, set); //почему не работает с названием места для новой карточки???
+const checkInputValidity  = (formElement, inputElement, set) => {
+  showFormInputError(formElement, inputElement, inputElement.validationMessage, set); //показать сообщение ошибки ввода
   if (!inputElement.validity.valid) {
     // Если поле не проходит валидацию, покажем ошибку
     showFormInputError(formElement, inputElement, inputElement.validationMessage, set);
@@ -40,19 +38,24 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
+function makeButtonInactive(buttonElement, set){
+  buttonElement.classList.add(set.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', 'disabled');
+}
+
+function makeButtonActive(buttonElement, set){
+  buttonElement.classList.remove(set.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled', 'disabled');
+}
+
 const toggleButtonState = (inputList, buttonElement, set) => {
   // Если есть хотя бы один невалидный инпут
-  //console.log(set);
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add(set.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', 'disabled');
-    // console.log(set);
+    makeButtonInactive(buttonElement, set)
   } else {
+    makeButtonActive(buttonElement, set)
     // иначе сделай кнопку активной
-    //console.log(set);
-    buttonElement.classList.remove(set.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled', 'disabled');
   }
 };
 
@@ -60,19 +63,16 @@ const setEventListeners = (formElement, set) => {
   // Находим все поля внутри формы,
   // сделаем из них массив методом Array.from
   const inputList = Array.from(formElement.querySelectorAll(set.inputSelector));
-  // console.log(inputList);
   // Найдём в текущей форме кнопку отправки
   const buttonElement = formElement.querySelector(set.submitButtonSelector);
 
     // Обойдём все элементы полученной коллекции
     // каждому полю добавим обработчик события input
-    //console.log(inputList);
-    //console.log(inputElement);
     toggleButtonState(inputList, buttonElement, set);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        isValid(formElement, inputElement, set);
+        checkInputValidity (formElement, inputElement, set);
         // Вызовем toggleButtonState и передадим ей массив полей и кнопку
         toggleButtonState(inputList, buttonElement, set);
 
@@ -82,11 +82,9 @@ const setEventListeners = (formElement, set) => {
 
 
 const enableValidation = (set) => {
-  //console.log(set);
   // Найдём все формы с указанным классом в DOM,
   // сделаем из них массив методом Array.from
   const formList = Array.from(document.querySelectorAll(set.formSelector));
-  //console.log(Array.from(document.querySelectorAll('.form')));
 
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
