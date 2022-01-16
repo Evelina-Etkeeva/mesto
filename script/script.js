@@ -19,20 +19,20 @@ const openAddCard = document.querySelector('.button_type_add'); //кнопка �
 const popupImg = document.querySelector('.popup__img'); // картинка на весь экран
 const popupTitle = document.querySelector('.popup__title'); // подпись под картинками на весь экран
 const altText = 'изображение'; // все картинки - это изображения
+const classInactive = 'popup__save-btn_inactive'; // класс неактивной кнопки
 //const popupSaveBtn = document.querySelector('.popup__save-btn');
 
 //открытие попапа
-function closeOnEscape(event, popup){
+function closeOnEscape(event){
   if(event.key === 'Escape'){
+    const popup = document.querySelector('.popup_active')
     closePopup(popup);
   }
 }
 function openPopup(popup){
+  document.addEventListener('keydown', closeOnEscape)
+  //как передать функции ивент
   popup.classList.add('popup_active');
-  document.addEventListener('keydown', function(event){
-    closeOnEscape(event, popup)
-  }) //как передать функции ивент
-
 }
 
 // закрытие попапа
@@ -53,14 +53,19 @@ function openImagePopup(name, link){
 function closeImagePopup(){
   closePopup(imagePopup);
 }
+// сделать кнопку сохранить неактивной
+// хотела вставить ее импортом из файла валидации, но не поняла как
+function makeButtonInactive(buttonElement, btnClass){
+  buttonElement.classList.add(btnClass);
+  buttonElement.disabled = true;
+}
 
 //открытие формы редактирования профиля
 function openPopupEditProfile () {
   nameInput.value = myName.textContent;
   aboutMeInput.value = aboutMe.textContent;
   popupSaveBtn = popupEditProfile.querySelector('.popup__save-btn');
-  popupSaveBtn.classList.add('popup__save-btn_inactive');
-  popupSaveBtn.setAttribute('disabled','disabled')
+  makeButtonInactive(popupSaveBtn, classInactive);
   openPopup(popupEditProfile);
 }
 
@@ -74,8 +79,7 @@ function closePopupEditProfile () {
 //открытие формы добавления картинки
 function openPopupAddCard () {
   popupSaveBtn = popupAddCard.querySelector('.popup__save-btn');
-  popupSaveBtn.classList.add('popup__save-btn_inactive');
-  popupSaveBtn.setAttribute('disabled','disabled')
+  makeButtonInactive(popupSaveBtn, classInactive);
   openPopup(popupAddCard);
 }
 
@@ -102,30 +106,31 @@ function addLike(event){
 function deleteElement(event){
   event.target.closest('.element').remove();
 }
-
+// вставить элемент - карточку в список
 function renderCard (cardElement){
   elementsList.prepend(cardElement);
 }
 // функция создающая карточки из балванки, сразу добавляет обработчик на кнопки лайк, открыть на весь экран и удалить
 function getCardElement(name, link) {
   const newCardElement = elementTemplate.content.cloneNode(true).querySelector('.element');
+  const newCardImageButton = newCardElement.querySelector('.element__image');
   newCardElement.querySelector('.element__title').textContent = name;
-  newCardElement.querySelector('.element__image').src = link;
-  newCardElement.querySelector('.element__image').alt = altText;
+  newCardImageButton.src = link;
+  newCardImageButton.alt = altText;
   const newCardLikeButton = newCardElement.querySelector('.button_type_like');
   newCardLikeButton.addEventListener('click', addLike);
   const newCardDeleteButton = newCardElement.querySelector('.button_type_delete');
   newCardDeleteButton.addEventListener('click', deleteElement);
-  const newCardImageButton = newCardElement.querySelector('.element__image');
   newCardImageButton.addEventListener('click', () => openImagePopup(name, link));
-  renderCard(newCardElement)
+  return newCardElement;
 }
 
 // функция, добавляющая карточки из попапа
 function handleAddCardSubmit (event) {
   event.preventDefault();
   //замена данных на новые
-  getCardElement(placeNameInput.value, placeImgInput.value);
+  const newCard = getCardElement(placeNameInput.value, placeImgInput.value);
+  renderCard(newCard);
   formAddCard.reset();
 
   //закрыть окнопопап
@@ -156,7 +161,8 @@ formAddCard.addEventListener('submit', handleAddCardSubmit);
 openAddCard.addEventListener('click', openPopupAddCard);
 // карточки по умолчанию
 initialCards.forEach(data => {
-  getCardElement(data.name, data.link);
+  const initCard = getCardElement(data.name, data.link);
+  renderCard(initCard);
 });
 // Обновление информации профиля
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
