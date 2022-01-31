@@ -13,8 +13,6 @@ const hideFormInputError = (formElement, inputElement, set) => {
   errorElement.textContent = '';
 };
 
-
-
 // Функция, которая проверяет валидность поля
 const checkInputValidity  = (formElement, inputElement, set) => {
   showFormInputError(formElement, inputElement, inputElement.validationMessage, set); //показать сообщение ошибки ввода
