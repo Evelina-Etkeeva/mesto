@@ -1,6 +1,6 @@
 const imagePopup = document.querySelector('.popup_content_image');
-
-class Card{
+import { openPopup, closePopup } from "./script.js";
+export class Card{
   constructor(name, img, template){
     this._name = name;
     this._img = img;
@@ -68,3 +68,5 @@ class Card{
     return this._cardElement; //готовая карточка
   }
 }
+
+

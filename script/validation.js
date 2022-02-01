@@ -1,7 +1,9 @@
-class FormValidator{
+ export class FormValidator{
   constructor(dict, formElement){
     this._dict = dict;
     this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._dict.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._dict.submitButtonSelector);
   }
 
   //функция, добавляющая класс со стилями ошибки ввода
@@ -31,9 +33,9 @@ class FormValidator{
     }
   };
 
-  _hasInvalidInput(inputList){
+  _hasInvalidInput(){
     // проходим по этому массиву методом some
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       // Если поле не валидно, колбэк вернёт true
       // Обход массива прекратится и вся фунцкция
       // hasInvalidInput вернёт true
@@ -41,45 +43,40 @@ class FormValidator{
     })
   };
 
-  _makeButtonInactive(buttonElement, btnClass){
-    buttonElement.classList.add(btnClass);
-    buttonElement.disabled = true;
+  _makeButtonInactive(){
+    this._buttonElement.classList.add(this._dict.inactiveButtonClass);
+    this._buttonElement.disabled = true;
   }
 
-  _makeButtonActive(buttonElement, btnClass){
-    buttonElement.classList.remove(btnClass);
-    buttonElement.disabled = false;
+  _makeButtonActive(){
+    this._buttonElement.classList.remove(this._dict.inactiveButtonClass);
+    this._buttonElement.disabled = false;
   }
 
-  _toggleButtonState(inputList, buttonElement){
+  _toggleButtonState(){
     // Если есть хотя бы один невалидный инпут
-    if (this._hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput()) {
       // сделай кнопку неактивной
-      this._makeButtonInactive(buttonElement, this._dict.inactiveButtonClass)
+      this._makeButtonInactive()
     } else {
-      this._makeButtonActive(buttonElement, this._dict.inactiveButtonClass)
+      this._makeButtonActive()
       // иначе сделай кнопку активной
     }
   };
 
-
   _setEventListeners(){
-    // Находим все поля внутри формы,
-    // сделаем из них массив методом Array.from
-    const inputList = Array.from(this._formElement.querySelectorAll(this._dict.inputSelector));
     // Найдём в текущей форме кнопку отправки
-    const buttonElement = this._formElement.querySelector(this._dict.submitButtonSelector);
 
       // Обойдём все элементы полученной коллекции
       // каждому полю добавим обработчик события input
-      this._toggleButtonState(inputList, buttonElement);
+      this._toggleButtonState();
 
-      inputList.forEach((inputElement) => {
+      this._inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
 
           this._checkInputValidity (inputElement);
           // Вызовем toggleButtonState и передадим ей массив полей и кнопку
-          this._toggleButtonState(inputList, buttonElement);
+          this._toggleButtonState();
 
         });
         this._formElement.addEventListener('submit', (evt) => {
@@ -89,23 +86,8 @@ class FormValidator{
   };
 
   enableValidation(){
-
     this._setEventListeners();
   }
 
 }
 
-const validationDict = {
-  formSelector: '.form',
-  inputSelector:  '.form__item',
-  submitButtonSelector: '.popup__save-btn',
-  inactiveButtonClass: 'popup__save-btn_inactive',
-  inputErrorClass: 'form__item-error',
-  errorClass: 'form__error_active'
-}
-
-const formList = Array.from(document.querySelectorAll(validationDict.formSelector));
-formList.forEach((formElement) => {
-  const form = new FormValidator(validationDict, formElement);
-  form.enableValidation();
-});
