@@ -1,16 +1,14 @@
-const elementTemplate = document.querySelector('.element-template');//балванка для новых карточек
+
 const elementsList = document.querySelector('.elements__list');//список карточек
 const imagePopup = document.querySelector('.popup_content_image');
 const openEditProfile = document.querySelector('.button_type_edit');//кнопка открыть окно редактирования профиля
 const popupEditProfile = document.querySelector('.popup_content_edit-profile');// попап редактирования профиля
-const closeEditProfile = popupEditProfile.querySelector('.button_type_close');//кнопка закрыть окно редактирования профиля
 const formEditProfile = document.querySelector('.form_content_edit-profile');//формы в окне изменения информации профиля
 const nameInput = document.querySelector('.form__item_el_name');// форма имя
 const aboutMeInput = document.querySelector('.form__item_el_about-me');// форма обо мне
 const myName = document.querySelector('.profile__name');// имя в профиле
 const aboutMe = document.querySelector('.profile__about-me'); // обо мне в профиле
 const popupAddCard = document.querySelector('.popup_content_add-card');//попап для добавления новой карточки
-const closeAddCard = popupAddCard.querySelector('.button_type_close');//кнопка закрыть окно добавления новых картинок
 const formAddCard = document.querySelector('.form_content_add-card');// форма с добавлением новой картинки
 const placeNameInput = document.querySelector('.form__item_el_place-name');//форма с названием карточки
 const placeImgInput = document.querySelector('.form__item_el_place-img');//форма с ссылкой на картинку
@@ -97,45 +95,6 @@ function handleEditProfileFormSubmit (event) {
     closePopup(popupEditProfile);
 }
 
-// // лайк
-// function addLike(event){
-//   event.target.classList.toggle('active');
-// }
-// // удаление карточки
-// function deleteElement(event){
-//   event.target.closest('.element').remove();
-// }
-// // вставить элемент - карточку в список
-// function renderCard (cardElement){
-//   elementsList.prepend(cardElement);
-// }
-// функция создающая карточки из балванки, сразу добавляет обработчик на кнопки лайк, открыть на весь экран и удалить
-// function getCardElement(name, link) {
-//   const newCardElement = elementTemplate.content.cloneNode(true).querySelector('.element');
-//   const newCardImageButton = newCardElement.querySelector('.element__image');
-//   newCardElement.querySelector('.element__title').textContent = name;
-//   newCardImageButton.src = link;
-//   newCardImageButton.alt = altText;
-//   const newCardLikeButton = newCardElement.querySelector('.button_type_like');
-//   newCardLikeButton.addEventListener('click', addLike);
-//   const newCardDeleteButton = newCardElement.querySelector('.button_type_delete');
-//   newCardDeleteButton.addEventListener('click', deleteElement);
-//   newCardImageButton.addEventListener('click', () => openImagePopup(name, link));
-//   return newCardElement;
-// }
-
-
-// // функция, добавляющая карточки из попапа
-// function handleAddCardSubmit (event) {
-//   event.preventDefault();
-//   //замена данных на новые
-//   const newCard = getCardElement(placeNameInput.value, placeImgInput.value);
-//   renderCard(newCard);
-//   formAddCard.reset();
-
-//   //закрыть окнопопап
-//   closePopupAddCard();
-// }
 
 class Card{
   constructor(name, img){
@@ -191,6 +150,7 @@ class Card{
       this._openImagePopup();
     });
     //закрыть картину на весь экран
+    //?Может стоит сделать класс для всех попапов?
     imagePopup.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
         this._closeImagePopup(imagePopup);
@@ -207,7 +167,7 @@ class Card{
   }
 }
 
-
+//добавление новой картинки в галерею
 function handleAddCardSubmit (event) {
   event.preventDefault();
   //замена данных на новые
@@ -233,11 +193,7 @@ popupAddCard.addEventListener('click', (evt) => {
   }
 });
 
-// imagePopup.addEventListener('click', (evt) => {
-//   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
-//     closeImagePopup(imagePopup);
-//   }
-// });
+
 
 // сохранение новой карточки
 formAddCard.addEventListener('submit', handleAddCardSubmit);
@@ -245,7 +201,7 @@ formAddCard.addEventListener('submit', handleAddCardSubmit);
 openAddCard.addEventListener('click', openPopupAddCard);
 // карточки по умолчанию
 initialCards.forEach(data => {
-  const initCard = new Card(data.name, data.link);
+  const initCard = new Card(data.name, data.link, '.element-template');
   const initCardElement = initCard.generateCard();
   elementsList.prepend(initCardElement);
 });

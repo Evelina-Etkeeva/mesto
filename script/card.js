@@ -1,15 +1,16 @@
 const imagePopup = document.querySelector('.popup_content_image');
 
 class Card{
-  constructor(name, img){
+  constructor(name, img, template){
     this._name = name;
     this._img = img;
+    this._template = template;
   }
 
   //выбрали балванку
   _getTameplate(){
     const cardElement = document
-      .querySelector('.element-template')
+      .querySelector(this._template)
       .content
       .querySelector('.element')
       .cloneNode(true);
