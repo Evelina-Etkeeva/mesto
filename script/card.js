@@ -1,5 +1,5 @@
-const imagePopup = document.querySelector('.popup_content_image');
-import { openPopup, closePopup } from "./script.js";
+
+import { openPopup, imagePopup, popupImg, popupTitle} from "./utils.js"
 export class Card{
   constructor(name, img, template){
     this._name = name;
@@ -23,13 +23,13 @@ export class Card{
   }
   // удаление карточки
   _deleteElement(){
-    this._cardElement.querySelector('.button_type_delete').closest('.element').remove();
+    this._cardElement.remove(); //что значит занулить?
+    this._cardElement = null;
   }
   //открыть картинку на весь экран
   _openImagePopup(){
     //окно с картинкой на весь экран
-    const popupImg = document.querySelector('.popup__img'); // картинка на весь экран
-    const popupTitle = document.querySelector('.popup__title'); // подпись под картинками на весь экран
+
     const altText = 'изображение'; // все картинки - это изображения
     popupImg.src = this._img;
     popupImg.alt = altText;
@@ -51,12 +51,6 @@ export class Card{
     //открыть картинку на весь
     this._cardElement.querySelector('.element__image').addEventListener('click', ()=>{
       this._openImagePopup();
-    });
-    //закрыть картину на весь экран
-    imagePopup.addEventListener('click', (evt) => {
-      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
-        closePopup(imagePopup);
-      }
     });
   }
   //собрать готовую карточку со всеми наворотами

@@ -1,7 +1,8 @@
 
-import { FormValidator } from "./validation.js";
+import { FormValidator } from "./formValidator.js";
 import { Card } from "./card.js";
 import { initialCards } from "../initial cards/cards.js";
+import { openPopup, imagePopup, closePopup, formAddCard } from "./utils.js";
 
 const elementsList = document.querySelector('.elements__list');//список карточек
 const openEditProfile = document.querySelector('.button_type_edit');//кнопка открыть окно редактирования профиля
@@ -12,7 +13,7 @@ const aboutMeInput = document.querySelector('.form__item_el_about-me');// фор
 const myName = document.querySelector('.profile__name');// имя в профиле
 const aboutMe = document.querySelector('.profile__about-me'); // обо мне в профиле
 const popupAddCard = document.querySelector('.popup_content_add-card');//попап для добавления новой карточки
-const formAddCard = document.querySelector('.form_content_add-card');// форма с добавлением новой картинки
+
 const placeNameInput = document.querySelector('.form__item_el_place-name');//форма с названием карточки
 const placeImgInput = document.querySelector('.form__item_el_place-img');//форма с ссылкой на картинку
 const openAddCard = document.querySelector('.button_type_add'); //кнопка добавить карточки
@@ -26,25 +27,7 @@ const validationDict = {
 }; //словарь для валидации форм
 
 //закрытие по кнопке esc
-function closeOnEscape(event){
-  if(event.key === 'Escape'){
-    const popup = document.querySelector('.popup_active')
-    closePopup(popup);
-  }
-}
 
-//открытие попапа
-export function openPopup(popup){
-  document.addEventListener('keydown', closeOnEscape)
-  //как передать функции ивент
-  popup.classList.add('popup_active');
-}
-
-// закрытие попапа
-export function closePopup(popup){
-  popup.classList.remove('popup_active');
-  document.removeEventListener('keydown', closeOnEscape)
-}
 
 
 //открытие формы редактирования профиля
@@ -81,13 +64,16 @@ function handleEditProfileFormSubmit (event) {
     //закрыть окнопопап
     closePopup(popupEditProfile);
 }
-
+function makeNewCard(name, link, template){
+  const newCard = new Card(name, link, template)
+  const cardElement = newCard.generateCard();
+  return cardElement;
+}
 //добавление новой картинки в галерею
 function handleAddCardSubmit (event) {
   event.preventDefault();
   //замена данных на новые
-  const newCard = new Card(placeNameInput.value, placeImgInput.value, '.element-template')
-  const cardElement = newCard.generateCard();
+  const cardElement = makeNewCard(placeNameInput.value, placeImgInput.value, '.element-template');
   formAddCard.reset();
 
   //закрыть окнопопап
@@ -98,9 +84,12 @@ function handleAddCardSubmit (event) {
 //включение валидации на всех формах
  const formList = Array.from(document.querySelectorAll(validationDict.formSelector));
 
+ const formArray = [];
+
  formList.forEach((formElement) => {
   const form = new FormValidator(validationDict, formElement);
   form.enableValidation();
+  formArray.push(form); //это имелось в виду?
 });
 
 //закрытие кликом на оверлей или кнопку
@@ -116,7 +105,12 @@ popupAddCard.addEventListener('click', (evt) => {
     closePopupAddCard(popupAddCard);
   }
 });
-
+//закрыть картину на весь экран
+imagePopup.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-btn')) {
+    closePopup(imagePopup);
+  }
+});
 
 
 // сохранение новой карточки
@@ -125,8 +119,7 @@ formAddCard.addEventListener('submit', handleAddCardSubmit);
 openAddCard.addEventListener('click', openPopupAddCard);
 // карточки по умолчанию
 initialCards.forEach(data => {
-  const initCard = new Card(data.name, data.link, '.element-template');
-  const initCardElement = initCard.generateCard();
+  const initCardElement = makeNewCard(data.name, data.link, '.element-template');
   elementsList.prepend(initCardElement);
 });
 // Обновление информации профиля
