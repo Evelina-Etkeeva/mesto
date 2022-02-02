@@ -47,6 +47,7 @@ function closePopupEditProfile () {
 //открытие формы добавления картинки
 function openPopupAddCard () {
   openPopup(popupAddCard);
+  formAddCard.reset();
 }
 
 //закрытие формы добавления картинки без сохранения
@@ -74,23 +75,21 @@ function handleAddCardSubmit (event) {
   event.preventDefault();
   //замена данных на новые
   const cardElement = makeNewCard(placeNameInput.value, placeImgInput.value, '.element-template');
-  formAddCard.reset();
+
 
   //закрыть окнопопап
   closePopupAddCard();
+
+  formAddCard.reset();
   elementsList.prepend(cardElement);
 }
 
 //включение валидации на всех формах
- const formList = Array.from(document.querySelectorAll(validationDict.formSelector));
+const formProfileValidator = new FormValidator(validationDict, formEditProfile);
+  formProfileValidator.enableValidation();
 
- const formArray = [];
-
- formList.forEach((formElement) => {
-  const form = new FormValidator(validationDict, formElement);
-  form.enableValidation();
-  formArray.push(form); //это имелось в виду?
-});
+const formCardValidator = new FormValidator(validationDict, formAddCard);
+  formCardValidator.enableValidation();
 
 //закрытие кликом на оверлей или кнопку
 //для окна редактирования профиля

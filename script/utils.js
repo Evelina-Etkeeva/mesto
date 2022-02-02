@@ -14,7 +14,6 @@ export function openPopup(popup){
   if(event.key === 'Escape'){
     const popup = document.querySelector('.popup_active');
     closePopup(popup);
-    formAddCard.reset(); //некрасива
   }
 }
 
