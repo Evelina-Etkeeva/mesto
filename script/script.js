@@ -1,22 +1,13 @@
 
-import { FormValidator } from "./formValidator.js";
-import { Card } from "./card.js";
-import { initialCards } from "../initial cards/cards.js";
-import { openPopup, imagePopup, closePopup, formAddCard } from "./utils.js";
+import { FormValidator } from "./components/formValidator.js";
+import { Card } from "./components/card.js";
+import { initialCards } from "./../initial cards/cards.js";
+import { openPopup, imagePopup, closePopup, formAddCard } from "./utils/utils.js";
+import {elementsList, openEditProfile, popupEditProfile,
+formEditProfile, aboutMeInput, myName,
+aboutMe, popupAddCard, placeNameInput, placeImgInput, openAddCard} from "./utils/constant.js";
+import Section from "./components/section.js"
 
-const elementsList = document.querySelector('.elements__list');//список карточек
-const openEditProfile = document.querySelector('.button_type_edit');//кнопка открыть окно редактирования профиля
-const popupEditProfile = document.querySelector('.popup_content_edit-profile');// попап редактирования профиля
-const formEditProfile = document.querySelector('.form_content_edit-profile');//формы в окне изменения информации профиля
-const nameInput = document.querySelector('.form__item_el_name');// форма имя
-const aboutMeInput = document.querySelector('.form__item_el_about-me');// форма обо мне
-const myName = document.querySelector('.profile__name');// имя в профиле
-const aboutMe = document.querySelector('.profile__about-me'); // обо мне в профиле
-const popupAddCard = document.querySelector('.popup_content_add-card');//попап для добавления новой карточки
-
-const placeNameInput = document.querySelector('.form__item_el_place-name');//форма с названием карточки
-const placeImgInput = document.querySelector('.form__item_el_place-img');//форма с ссылкой на картинку
-const openAddCard = document.querySelector('.button_type_add'); //кнопка добавить карточки
 const validationDict = {
   formSelector: '.form',
   inputSelector:  '.form__item',
@@ -117,13 +108,25 @@ formAddCard.addEventListener('submit', handleAddCardSubmit);
 //открыть попап добавление новых картинок
 openAddCard.addEventListener('click', openPopupAddCard);
 // карточки по умолчанию
-initialCards.forEach(data => {
-  const initCardElement = makeNewCard(data.name, data.link, '.element-template');
-  elementsList.prepend(initCardElement);
-});
+// initialCards.forEach(data => {
+//   const initCardElement = makeNewCard(data.name, data.link, '.element-template');
+//   elementsList.prepend(initCardElement);
+// });
 // Обновление информации профиля
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 // открыть попап редактирования профиля
 openEditProfile.addEventListener('click', openPopupEditProfile);
 
+//создаем объект с карточками и функцией, которая рисует одну карточку
+const obj = {
+  items: initialCards,
+  renderer: (initialCards) => {
+    const newCard = new Card(initialCards.name, initialCards.link, '.element-template')
+    const cardElement = newCard.generateCard();
+    return cardElement;
+  }
+}
 
+// const InitialCardsList = new Section({items: initialCards, renderer: makeNewCard}, '.elements__list');
+const InitialCardsList = new Section(obj, '.elements__list');
+InitialCardsList.renderItems();
