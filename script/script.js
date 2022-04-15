@@ -61,18 +61,31 @@ function makeNewCard(name, link, template){
   const cardElement = newCard.generateCard();
   return cardElement;
 }
+
+
 //добавление новой картинки в галерею
 function handleAddCardSubmit (event) {
   event.preventDefault();
-  //замена данных на новые
-  const cardElement = makeNewCard(placeNameInput.value, placeImgInput.value, '.element-template');
-
+  //мое недорешение: создать новый объект, который будет передаваться в новую копию класса Section
+  const object = [{
+    name: placeNameInput.value,
+    link: placeImgInput.value
+  }];
+  const obj = {
+    items: object,
+    renderer: (object) => {
+      const newCard = new Card(object.name, object.link, '.element-template')
+      const cardElement = newCard.generateCard();
+      return cardElement;
+    }
+  }
+    const OneNewCard = new Section(obj, '.elements__list');
+    OneNewCard.renderItems();
 
   //закрыть окнопопап
   closePopupAddCard();
-
+  //очистить поля ввода
   formAddCard.reset();
-  elementsList.prepend(cardElement);
 }
 
 //включение валидации на всех формах
@@ -107,19 +120,15 @@ imagePopup.addEventListener('click', (evt) => {
 formAddCard.addEventListener('submit', handleAddCardSubmit);
 //открыть попап добавление новых картинок
 openAddCard.addEventListener('click', openPopupAddCard);
-// карточки по умолчанию
-// initialCards.forEach(data => {
-//   const initCardElement = makeNewCard(data.name, data.link, '.element-template');
-//   elementsList.prepend(initCardElement);
-// });
+
 // Обновление информации профиля
 formEditProfile.addEventListener('submit', handleEditProfileFormSubmit);
 // открыть попап редактирования профиля
 openEditProfile.addEventListener('click', openPopupEditProfile);
 
-//создаем объект с карточками и функцией, которая рисует одну карточку
-const obj = {
-  items: initialCards,
+//создаем объект с карточками по-умолчанию и функцией, которая рисует одну карточку
+const objDefault = {
+  items: initialCards.reverse(),
   renderer: (initialCards) => {
     const newCard = new Card(initialCards.name, initialCards.link, '.element-template')
     const cardElement = newCard.generateCard();
@@ -127,6 +136,6 @@ const obj = {
   }
 }
 
-// const InitialCardsList = new Section({items: initialCards, renderer: makeNewCard}, '.elements__list');
-const InitialCardsList = new Section(obj, '.elements__list');
+// нарисуем карточки по-умолчанию
+const InitialCardsList = new Section(objDefault, '.elements__list');
 InitialCardsList.renderItems();
