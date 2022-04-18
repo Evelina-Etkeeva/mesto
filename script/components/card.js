@@ -1,7 +1,4 @@
 
-// import { openPopup, imagePopup, popupImg, popupTitle} from "./../utils/utils.js"
-// import { PopupWithImage } from './popup.js';
-
 export class Card{
   constructor(name, img, template, handleCardClick){
     this._name = name;
@@ -29,17 +26,7 @@ export class Card{
     this._cardElement.remove(); //что значит занулить?
     this._cardElement = null;
   }
-  //открыть картинку на весь экран
-  // _openImagePopup(){
-  //   //окно с картинкой на весь экран
-
-  //   const altText = 'изображение'; // все картинки - это изображения
-  //   popupImg.src = this._img;
-  //   popupImg.alt = altText;
-  //   popupTitle.textContent = this._name;
-  //   openPopup(imagePopup);
-  // }
-
+  
 
   //вешаем слушатели
   _setEventListeners(){
@@ -53,13 +40,10 @@ export class Card{
     });
     //открыть картинку на весь
     this._cardElement.querySelector('.element__image').addEventListener('click', ()=>{
-      // const imgPopup = new PopupWithImage('.popup_content_image');
-      // imgPopup.openImgCard();
-      // console.log(cardSelector);
-      this._handleCardClick();
-      // this._openImagePopup();
+       this._handleCardClick();
     });
   }
+
   //собрать готовую карточку со всеми наворотами
   generateCard(){
     this._cardElement = this._getTameplate(); //создали элемент взяв из этого же класса балванку
