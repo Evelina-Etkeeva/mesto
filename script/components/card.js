@@ -1,10 +1,13 @@
 
-import { openPopup, imagePopup, popupImg, popupTitle} from "./../utils/utils.js"
+// import { openPopup, imagePopup, popupImg, popupTitle} from "./../utils/utils.js"
+// import { PopupWithImage } from './popup.js';
+
 export class Card{
-  constructor(name, img, template){
+  constructor(name, img, template, handleCardClick){
     this._name = name;
     this._img = img;
     this._template = template;
+    this._handleCardClick = handleCardClick;
   }
 
   //выбрали балванку
@@ -17,7 +20,7 @@ export class Card{
     return cardElement;
   }
 
-  // //функция для айка
+  // //функция для лайка
   _addLike(){
     this._cardElement.querySelector('.button_type_like').classList.toggle('active');
   }
@@ -27,15 +30,15 @@ export class Card{
     this._cardElement = null;
   }
   //открыть картинку на весь экран
-  _openImagePopup(){
-    //окно с картинкой на весь экран
+  // _openImagePopup(){
+  //   //окно с картинкой на весь экран
 
-    const altText = 'изображение'; // все картинки - это изображения
-    popupImg.src = this._img;
-    popupImg.alt = altText;
-    popupTitle.textContent = this._name;
-    openPopup(imagePopup);
-  }
+  //   const altText = 'изображение'; // все картинки - это изображения
+  //   popupImg.src = this._img;
+  //   popupImg.alt = altText;
+  //   popupTitle.textContent = this._name;
+  //   openPopup(imagePopup);
+  // }
 
 
   //вешаем слушатели
@@ -50,7 +53,11 @@ export class Card{
     });
     //открыть картинку на весь
     this._cardElement.querySelector('.element__image').addEventListener('click', ()=>{
-      this._openImagePopup();
+      // const imgPopup = new PopupWithImage('.popup_content_image');
+      // imgPopup.openImgCard();
+      // console.log(cardSelector);
+      this._handleCardClick();
+      // this._openImagePopup();
     });
   }
   //собрать готовую карточку со всеми наворотами
