@@ -48,8 +48,10 @@ export class Card{
   generateCard(){
     this._cardElement = this._getTameplate(); //создали элемент взяв из этого же класса балванку
     this._setEventListeners();
-    this._cardElement.querySelector('.element__image').src = this._img; //заполняем балванку актуальными данными
+    const cardImage = this._cardElement.querySelector('.element__image'); //заполняем балванку актуальными данными
+    cardImage.src = this._img;
     this._cardElement.querySelector('.element__title').textContent  = this._name;
+    cardImage.alt = this._name;
     return this._cardElement; //готовая карточка
   }
 }

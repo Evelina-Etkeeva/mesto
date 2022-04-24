@@ -38,11 +38,15 @@ const userData = new UserInfo({nameSelector: '.profile__name', infoSelector: '.p
 
 // инициализируем класс
 const popupEditProfileInfo = new PopupWithForm('.popup_content_edit-profile', '.button_type_edit', handleEditProfileFormSubmit);
+popupEditProfileInfo.buttonSelector.addEventListener('click', () => {
+  popupEditProfileInfo.open();
+  fillPopupForm();
+});
 popupEditProfileInfo.setEventListeners();
-popupEditProfileInfo._buttonSelector.addEventListener('click', fillPopupForm);
 
 // инициализируем класс
 const popupAddCardClass = new PopupWithForm('.popup_content_add-card', '.button_type_add', handleAddCardSubmit);
+popupAddCardClass.buttonSelector.addEventListener('click', () => popupAddCardClass.open());
 popupAddCardClass.setEventListeners();
 
 // функция создающая экземпляр класса попап с картинкой - колбек слушателя в классе card
@@ -69,8 +73,8 @@ function handleEditProfileFormSubmit (getData) {
 }
 
 //добавление новой картинки в галерею
-function handleAddCardSubmit () {
-  const inputValues = popupAddCardClass._getInputValues();
+function handleAddCardSubmit (getData) {
+  const inputValues = getData();
   const newCardElement = createCardElement(inputValues, '.element-template', handleCardClick);
   cardsList.addItem(newCardElement);
   popupAddCardClass.close();
