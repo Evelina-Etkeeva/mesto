@@ -1,20 +1,18 @@
 export default class Popup {
   constructor(popupSelector){
     this._popupSelector = document.querySelector(popupSelector);
+    this._escAction = this._handleEscClose.bind(this)
   }
 
   open(){
     //как передать функции ивент
     this._popupSelector.classList.add('popup_active');
-    document.addEventListener('keydown', this._handleEscClose.bind(this))
-    this.setEventListeners()
+    document.addEventListener('keydown', this._escAction)
   }
 
   close(){
     this._popupSelector.classList.remove('popup_active');
-    // console.log('check');
-    // document.removeEventListener('keydown', this._handleEscClose)
-    // Почему-то слушатели не снимаются, сначала 1 чек, потом 3, потом много :) 
+    document.removeEventListener('keydown', this._escAction)
   }
 
   _handleEscClose(event){

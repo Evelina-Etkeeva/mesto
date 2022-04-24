@@ -40,7 +40,7 @@ export class Card{
     });
     //открыть картинку на весь
     this._cardElement.querySelector('.element__image').addEventListener('click', ()=>{
-       this._handleCardClick();
+      this._handleCardClick(this._name, this._img);
     });
   }
 

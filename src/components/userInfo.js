@@ -2,8 +2,8 @@
 export default class UserInfo{
     constructor(obj){
       // obj - информация на странице, а не в попапе
-      this._nameSelector = obj.nameSelector;
-      this._infoSelector = obj.infoSelector;
+      this._nameSelector = document.querySelector(obj.nameSelector);
+      this._infoSelector = document.querySelector(obj.infoSelector);
     }
   
     getUserInfo(){
