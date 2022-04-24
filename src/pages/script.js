@@ -69,8 +69,7 @@ function handleEditProfileFormSubmit (getData) {
 }
 
 //добавление новой картинки в галерею
-function handleAddCardSubmit (event) {
-  event.preventDefault();
+function handleAddCardSubmit () {
   const inputValues = popupAddCardClass._getInputValues();
   const newCardElement = createCardElement(inputValues, '.element-template', handleCardClick);
   cardsList.addItem(newCardElement);
