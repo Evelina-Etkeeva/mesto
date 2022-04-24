@@ -9,7 +9,7 @@ export default class PopupWithImage extends Popup {
     }
     openImgCard(title, src){
       this._srcSelector.src = src;
-      this._popupSelector.alt = title;
+      this._srcSelector.alt = title;
       this._titleSelector.textContent = title;
       super.open();
     }
