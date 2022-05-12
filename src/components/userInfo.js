@@ -16,7 +16,7 @@ export default class UserInfo{
   
     setUserInfo(popupInfo){
       // принимает данные из попапа и вставляет их на страницу
-      this._nameSelector.textContent = popupInfo.name;
-      this._infoSelector.textContent = popupInfo.info;
+      this._nameSelector.textContent = popupInfo[0];
+      this._infoSelector.textContent = popupInfo[1];
     }
   }

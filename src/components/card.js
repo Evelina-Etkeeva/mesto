@@ -1,10 +1,11 @@
 
 export class Card{
-  constructor(name, img, template, handleCardClick){
+  constructor(name, img, template, handleCardClick, handleDeleteClick){
     this._name = name;
     this._img = img;
     this._template = template;
-    this._handleCardClick = handleCardClick;
+    this._handleCardClick = handleCardClick; //1 callback what tro do if someone'll click on pic
+    this._handleDeleteClick = handleDeleteClick; // 2 callback what to do if someone'll click on delet icon
   }
 
   //выбрали балванку
@@ -20,11 +21,9 @@ export class Card{
   // //функция для лайка
   _addLike(){
     this._cardElement.querySelector('.button_type_like').classList.toggle('active');
-  }
-  // удаление карточки
-  _deleteElement(){
-    this._cardElement.remove(); //что значит занулить?
-    this._cardElement = null;
+    const counter = Number(this._cardElement.querySelector('.element__like-counter').textContent);
+    console.log(Number(this._cardElement.querySelector('.element__like-counter').textContent));
+    this._cardElement.querySelector('.element__like-counter').textContent =counter+1;
   }
   
 
@@ -36,7 +35,7 @@ export class Card{
     });
     //кнопка корзина
     this._cardElement.querySelector('.button_type_delete').addEventListener('click', ()=>{
-      this._deleteElement();
+      this._handleDeleteClick();
     });
     //открыть картинку на весь
     this._cardElement.querySelector('.element__image').addEventListener('click', ()=>{

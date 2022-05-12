@@ -7,6 +7,7 @@ import Section from "../components/section.js"
 import PopupWithForm from '../components/popupWithForm.js';
 import UserInfo from '../components/userInfo.js';
 import PopupWithImage from '../components/popupWithImage.js'
+import PopupDeleteCard from '../components/popupDeleteCard.js';
 
 
 //включение валидации на всех формах
@@ -16,19 +17,8 @@ const formProfileValidator = new FormValidator(validationDict, formEditProfile);
 const formCardValidator = new FormValidator(validationDict, formAddCard);
   formCardValidator.enableValidation();
 
-
-//создаем объект с карточками по-умолчанию и функцией, которая рисует одну карточку
-const objDefault = {
-  items: initialCards.reverse(),
-  renderer: (initialCards) => {
-    const newCardElement = createCardElement(initialCards, '.element-template', handleCardClick);
-    return newCardElement;
-  }
-}
-
-// нарисуем карточки по-умолчанию
-const cardsList = new Section(objDefault, '.elements__list');
-cardsList.renderItems();
+// Нарисуем карточки по-умолчанию; их нет. Получим их с сервера попозже
+const cardsList = new Section({}, '.elements__list');
 
 // инициализируем класс для попапа с картинкой
 const imgPopup = new PopupWithImage('.popup_content_image');
@@ -49,10 +39,20 @@ const popupAddCardClass = new PopupWithForm('.popup_content_add-card', '.button_
 popupAddCardClass.buttonSelector.addEventListener('click', () => popupAddCardClass.open());
 popupAddCardClass.setEventListeners();
 
+// инициализируем класс
+const popupDeleteCard = new PopupDeleteCard('.popup_content_delete-card', handleDeleteCardSubmit);
+// popupDeleteCard.buttonSelector.addEventListener('click', ()=>popupDeleteCard.open());
+popupDeleteCard.setEventListeners();
+
 // функция создающая экземпляр класса попап с картинкой - колбек слушателя в классе card
 function handleCardClick(title, src){
   imgPopup.openImgCard(title, src);
   imgPopup.setEventListeners();
+}
+// колбэк-функция, открывающая экземпляр класса попап с формой удаления картинки 
+function handleDeleteClick(){
+  const parentElement = event.target.closest('.element');
+  popupDeleteCard.open(parentElement);
 }
 
 // функция заполнение форм ввода данных пользователя
@@ -66,6 +66,7 @@ function fillPopupForm () {
 // функция, сохраняющая новую информацию в профиль
 function handleEditProfileFormSubmit (getData) {
   //замена данных на новые
+  popupEditProfileInfo.loading(true);
   const inputValues = getData();
   userData.setUserInfo(inputValues);
   //закрыть окнопопап
@@ -74,15 +75,67 @@ function handleEditProfileFormSubmit (getData) {
 
 //добавление новой картинки в галерею
 function handleAddCardSubmit (getData) {
+  popupAddCardClass.loading(true);
   const inputValues = getData();
-  const newCardElement = createCardElement(inputValues, '.element-template', handleCardClick);
+  const newCardElement = createCardElement(inputValues, '.element-template', handleCardClick, handleDeleteClick);
   cardsList.addItem(newCardElement);
   popupAddCardClass.close();
 
 }
 
-function createCardElement(obj, selector, callback){
-  const newCard = new Card(obj.name, obj.info, selector, callback);
+// функция, удаляющая картинку
+function handleDeleteCardSubmit(element) {
+  event.preventDefault();
+  element.remove(); //что значит занулить?
+  popupDeleteCard.close();
+}
+
+function createCardElement(cardArr, selector, callbackCardClick, callbackDelete){
+  const newCard = new Card(cardArr[0], cardArr[1], selector, callbackCardClick, callbackDelete);
   const newCardElement = newCard.generateCard();
   return newCardElement;
 }
+
+
+const popupEditAvatar = new PopupWithForm('.popup_content_edit-avatar', '.profile__img', handleEditAvatarSubmit);
+popupEditAvatar.buttonSelector.addEventListener('click', () => {
+  popupEditAvatar.open();
+});
+popupEditAvatar.setEventListeners();
+
+function handleEditAvatarSubmit(getData){
+  event.preventDefault();
+  popupEditAvatar.loading(true); 
+  const inputAvatarUrl = getData();
+  const avatarSelector = document.querySelector('.profile__img');
+  avatarSelector.src = inputAvatarUrl[0];
+  popupEditAvatar.close();
+
+}
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-40/cards', {
+  headers: {
+    authorization: 'a81905a8-70e9-49b5-82c2-f5f8e94b1f23'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    //создаем объект с карточками по-умолчанию и функцией, которая рисует одну карточку
+    result.forEach(item => {
+      const oneCardArr = [item.name, item.link];
+      const newCardElement = createCardElement(oneCardArr, '.element-template', handleCardClick, handleDeleteClick);
+      cardsList.addItem(newCardElement);
+    });
+  });   
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-40/users/me', {
+  method: 'GET',
+  headers: {
+    authorization: 'a81905a8-70e9-49b5-82c2-f5f8e94b1f23'
+  }
+})
+  .then(res => res.json())
+  .then((result) => {
+    const infoArr = [result.name, result.about];
+    userData.setUserInfo(infoArr);
+  }); 
