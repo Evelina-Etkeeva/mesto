@@ -2,7 +2,7 @@
   "name": "yandex_praktikum",
   "version": "0.0.1",
   "description": "Учебный проект страницы с галереей фотографий.\r Проект доступен по [ссылке](https://evelina-etkeeva.github.io/mesto/)\r ### Обзор",
-  "main": "script.js",
+  "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",

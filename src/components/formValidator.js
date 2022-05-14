@@ -7,11 +7,12 @@
   }
 
   //функция, добавляющая класс со стилями ошибки ввода
-  _showFormInputError(inputElement, errorMessage){
+  _showFormInputError(inputElement, errorMessage){   
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._dict.inputErrorClass);
     errorElement.classList.add(this._dict.errorClass);
     errorElement.textContent = errorMessage;
+    
   };
   //функция, удаляющая класс со стилями ошибки ввода
   _hideFormInputError(inputElement){
@@ -70,7 +71,7 @@
       // Обойдём все элементы полученной коллекции
       // каждому полю добавим обработчик события input
       this._toggleButtonState();
-
+   
       this._inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
 

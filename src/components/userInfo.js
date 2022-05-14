@@ -4,6 +4,8 @@ export default class UserInfo{
       // obj - информация на странице, а не в попапе
       this._nameSelector = document.querySelector(obj.nameSelector);
       this._infoSelector = document.querySelector(obj.infoSelector);
+      this._avatarSelector = document.querySelector(obj.avatarSelector);
+
     }
   
     getUserInfo(){
@@ -14,9 +16,11 @@ export default class UserInfo{
       return pageInfo;
     }
   
-    setUserInfo(popupInfo){
-      // принимает данные из попапа и вставляет их на страницу
-      this._nameSelector.textContent = popupInfo[0];
-      this._infoSelector.textContent = popupInfo[1];
+    setUserInfo(infoObj){
+      this._authorId = infoObj._id;
+      // принимает данные с сервера и вставляет их на страницу
+      this._nameSelector.textContent = infoObj.name;
+      this._infoSelector.textContent = infoObj.about;
+      this._avatarSelector.src = infoObj.avatar;
     }
   }

@@ -16,12 +16,12 @@
       <main class="content">
         <section class="profile">
           <img class="profile__img-on-hover" src="<%=require('./images/avahover.svg')%>" />
-          <img class="profile__img" src="<%=require('./images/ava.jpeg')%>" alt="это ваше лицо" />
+          <img class="profile__img" src="" alt="это ваше лицо" />
           <div class="profile__info">
-            <h1 class="profile__name">Мое имя-тоже имя</h1>
+            <h1 class="profile__name"></h1>
             <button type="button" aria-label="edit" class="button button_type_edit profile__edit-btn"></button>
             <!-- поменять в css, настройках ссылки, жабу -->
-            <p class="profile__about-me">Я не могу больше на это смотреть, теперь ваша очередь.</p>
+            <p class="profile__about-me"></p>
           </div>
           <button type="button" aria-label="add" class="button button_type_add profile__add-btn"></button>
         </section>
@@ -85,7 +85,7 @@
           <form class="form form_content_edit-avatar" name="new-avatar-input" novalidate>
             <h2 class="form__header">Обновить аватар</h2>
             <input type="url" class="form__item form__item_el_avatar-img" id="avatar-img" name="avatar-img" placeholder="Ссылка на картинку" required />
-            <span class="place-img-error form__span"></span>
+            <span class="avatar-img-error form__span"></span>
             <button type="submit" class="button button_type_save popup__save-btn" value="Сохранить">Сохранить</button>
           </form>
         </div>
@@ -96,7 +96,7 @@
           <h2 class="element__title"></h2>
           <button type="button" aria-label="like" class="button button_type_like element__like-btn"></button>
           <span class="element__like-counter" type="number">0</span>
-          <button type="button" aria-label="delete" class="button button_type_delete element__delete-btn"></button>
+          <button type="button" aria-label="delete" class="button button_type_delete button_status_invisible element__delete-btn" disabled></button>
         </li>
       </template>
     </div>

@@ -15,6 +15,7 @@
 @import url(../blocks/button/_type/button_type_like.css);
 @import url(../blocks/button/_type/button_type_save.css);
 @import url(../blocks/button/_type/button_type_delete.css);
+@import url(../blocks/button/_status/button_status_invisible.css);
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__about-me/profile__about-me.css);
