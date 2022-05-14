@@ -10,6 +10,7 @@ export class Card{
     this._likeBtn = this._cardElement.querySelector('.button_type_like');
     this._likeCounter = this._cardElement.querySelector('.element__like-counter');
     this._showLikeF = this._showLike.bind(this);
+    this._deleteElementF = this._deleteElement.bind(this);
   }
 
   //выбрали балванку
@@ -22,6 +23,12 @@ export class Card{
     return cardElement;
   }  
   
+  // удаление карточки
+  _deleteElement(){
+    this._cardElement.remove(); //что значит занулить?
+    this._cardElement = null;
+  }
+
   _showLike(isLiked){
     if (isLiked) {
       this._likeBtn.classList.add('active');
@@ -39,7 +46,7 @@ export class Card{
     });
     //кнопка корзина
     this._cardElement.querySelector('.button_type_delete').addEventListener('click', ()=>{
-      this._handleDeleteClick(this._cardObj._id);
+      this._handleDeleteClick(this._cardObj._id, this._deleteElementF);
     });
     //открыть картинку на весь
     this._cardElement.querySelector('.element__image').addEventListener('click', ()=>{
