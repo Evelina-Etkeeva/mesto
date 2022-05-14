@@ -1,7 +1,7 @@
 import './index.css'; // добавьте импорт главного файла стилей
 import { FormValidator } from "../components/formValidator.js";
 import { Card } from "../components/card.js";
-import {formEditProfile, validationDict, formAddCard, formEditAvatar } from "../components/constant.js";
+import {formEditProfile, validationDict, formAddCard, formEditAvatar, baseUrl, headers } from "../components/constant.js";
 import Section from "../components/section.js"
 import PopupWithForm from '../components/popupWithForm.js';
 import UserInfo from '../components/userInfo.js';
@@ -10,14 +10,12 @@ import PopupDeleteCard from '../components/popupWithConfirmation.js';
 import Api from '../components/api.js';
 
 // функция создающая экземпляр класса попап с картинкой - колбек слушателя в классе card
-export function handleCardClick(title, src){
+function handleCardClick(title, src){
   imgPopup.openImgCard(title, src);
-  imgPopup.setEventListeners();
 }
 // колбэк-функция, открывающая экземпляр класса попап с формой удаления картинки 
-export function handleDeleteClick(cardId){
-  const parentElement = event.target.closest('.element');
-  popupDeleteCard.open(parentElement, cardId);
+function handleDeleteClick(cardId, deleteElement){
+  popupDeleteCard.open(cardId, deleteElement);
 }
 
 // функция заполнение форм ввода данных пользователя
@@ -33,35 +31,69 @@ function handleEditProfileFormSubmit (getData) {
   //замена данных на новые
   popupEditProfileInfo.loading(true);
   const inputValues = getData();
-  api.updateUserData(popupEditProfileInfo, inputValues);
+  api.updateUserData(inputValues)
+  .then(result =>{
+    userData.setUserInfo(result);
+  })
+  .catch(err => console.log(`Ошибка.....: ${err}`))
+  .finally(()=>  {
+    popupEditProfileInfo.loading(false)
+    popupEditProfileInfo.close();
+  });
 }
 
 //добавление новой картинки в галерею
 function handleAddCardSubmit (getData) {
   popupAddCardClass.loading(true);
   const inputValues = getData();
-  api.addNewCard(popupAddCardClass, inputValues);
+  api.addNewCard(inputValues)
+  .then((result) => {
+    //создаем объект с карточками по-умолчанию и функцией, которая рисует одну карточку
+    const newCardElement = createCardElement(result);
+    cardsList.addItem(newCardElement);
+  })
+  .catch(err => console.log(`Ошибка.....: ${err}`))
+  .finally(()=>  {
+    popupAddCardClass.loading(false);
+    popupAddCardClass.close();
+  });  
+
 }
 
 // функция, удаляющая картинку
-function handleDeleteCardSubmit(element, cardId) {
+function handleDeleteCardSubmit(cardId, deleteElement) {
   event.preventDefault();
-  api.deleteCard(popupDeleteCard, element, cardId);
+  api.deleteCard(cardId)
+  .then(()=>{
+    deleteElement();
+    popupDeleteCard.close();
+  })
+  .catch(err => console.log(`Ошибка.....: ${err}`));
 }
 
-export function handleLikeClick(cardObj, showLike){
+function handleLikeClick(cardObj, showLike){
 
-  if (cardObj.likes.some(e => e._id === userData._authorId)) {
-    api.deleteLike(cardObj, showLike);
+  if (cardObj.likes.some(e => e._id === userData.authorId)) {
+    api.deleteLike(cardObj._id)
+    .then(res => {
+      cardObj.likes = res.likes;
+      showLike(false);
+    })
+    .catch(err => console.log(`Ошибка.....: ${err}`));     
   }
   else {
-    api.addLike(cardObj, showLike);
+    api.addLike(cardObj._id)
+    .then(res => {
+      cardObj.likes = res.likes;
+      showLike(true);
+    })
+    .catch(err => console.log(`Ошибка.....: ${err}`)); 
   }
 }
 
-export function createCardElement(cardObj, authorId, selector, callbackCardClick, callbackDelete, handleLikeClick){
-  const newCard = new Card(cardObj, selector, callbackCardClick, callbackDelete, handleLikeClick);
-  const newCardElement = newCard.generateCard(authorId);
+function createCardElement(cardObj){
+  const newCard = new Card(cardObj, '.element-template', handleCardClick, handleDeleteClick, handleLikeClick);
+  const newCardElement = newCard.generateCard(userData.authorId);
   return newCardElement;
 }
 
@@ -69,7 +101,22 @@ function handleEditAvatarSubmit(getData){
   event.preventDefault();
   popupEditAvatar.loading(true); 
   const inputAvatarUrl = getData();
-  api.updateAvatar(popupEditAvatar, inputAvatarUrl);
+  api.updateAvatar(inputAvatarUrl[0])    
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    } else{
+      return Promise.reject(`Ошибка: ${res.status}`);
+    }    
+  })
+  .then(res => {
+    userData.setUserInfo(res);
+  })
+  .catch(err => console.log(`Ошибка.....: ${err}`)) 
+  .finally(()=>  {
+    popupEditAvatar.close();
+    popupEditAvatar.loading(false); 
+  });
 }
 
 //включение валидации на всех формах
@@ -82,11 +129,17 @@ const formCardValidator = new FormValidator(validationDict, formAddCard);
 const formAvatarValidator = new FormValidator(validationDict, formEditAvatar);
   formAvatarValidator.enableValidation();
 
+const renderer = (cardObj) => {
+  const newCardElement = createCardElement(cardObj);
+  return newCardElement;
+}
+
 // Нарисуем карточки по-умолчанию; их нет. Получим их с сервера попозже
-const cardsList = new Section({}, '.elements__list');
+const cardsList = new Section(renderer, '.elements__list');
 
 // инициализируем класс для попапа с картинкой
 const imgPopup = new PopupWithImage('.popup_content_image');
+imgPopup.setEventListeners();
 
 // инициализируем класс с информацией о пользователе
 const userData = new UserInfo({nameSelector: '.profile__name', infoSelector: '.profile__about-me', avatarSelector: '.profile__img'})
@@ -106,7 +159,6 @@ popupAddCardClass.setEventListeners();
 
 // инициализируем класс
 const popupDeleteCard = new PopupDeleteCard('.popup_content_delete-card', handleDeleteCardSubmit);
-// popupDeleteCard.buttonSelector.addEventListener('click', ()=>popupDeleteCard.open());
 popupDeleteCard.setEventListeners();
 
 const popupEditAvatar = new PopupWithForm('.popup_content_edit-avatar', '.profile__img', handleEditAvatarSubmit);
@@ -115,6 +167,15 @@ popupEditAvatar.buttonSelector.addEventListener('click', () => {
 });
 popupEditAvatar.setEventListeners();
 
-const api = new Api(userData, cardsList);
-api.getInitialCards();
-api.getUserData();
+const api = new Api(baseUrl, headers);
+
+Promise.all([
+  api.getUserData(),
+  api.getInitialCards()
+])
+.then((results) => {
+  //создаем объект с карточками по-умолчанию и функцией, которая рисует одну карточку
+  userData.setUserInfo(results[0]);
+  cardsList.renderItems(results[1].reverse());
+})
+.catch(err => console.log(`Ошибка.....: ${err}`)); 

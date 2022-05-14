@@ -17,7 +17,7 @@ export default class UserInfo{
     }
   
     setUserInfo(infoObj){
-      this._authorId = infoObj._id;
+      this.authorId = infoObj._id;
       // принимает данные с сервера и вставляет их на страницу
       this._nameSelector.textContent = infoObj.name;
       this._infoSelector.textContent = infoObj.about;

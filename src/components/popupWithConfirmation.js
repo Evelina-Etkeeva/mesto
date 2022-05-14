@@ -6,15 +6,15 @@ export default class PopupDeleteCard extends Popup{
       this._handleDeleteSubmit = handleDeleteSubmit;
     }
     
-    open(element, cardId){
+    open(cardId, deleteElement){
         super.open();
-        this._element = element;
+        this._deleteElement = deleteElement;
         this._cardId = cardId;
     }
 
     setEventListeners(){
       super.setEventListeners();
-      this._popupSelector.addEventListener('submit', () => this._handleDeleteSubmit(this._element, this._cardId));
+      this._popupSelector.addEventListener('submit', () => this._handleDeleteSubmit(this._cardId, this._deleteElement));
     }  
   }
   
