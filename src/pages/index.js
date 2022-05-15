@@ -34,11 +34,11 @@ function handleEditProfileFormSubmit (getData) {
   api.updateUserData(inputValues)
   .then(result =>{
     userData.setUserInfo(result);
+    popupEditProfileInfo.close();
   })
   .catch(err => console.log(`Ошибка.....: ${err}`))
   .finally(()=>  {
-    popupEditProfileInfo.loading(false)
-    popupEditProfileInfo.close();
+    popupEditProfileInfo.loading(false);
   });
 }
 
@@ -51,11 +51,12 @@ function handleAddCardSubmit (getData) {
     //создаем объект с карточками по-умолчанию и функцией, которая рисует одну карточку
     const newCardElement = createCardElement(result);
     cardsList.addItem(newCardElement);
+    popupAddCardClass.close();
   })
   .catch(err => console.log(`Ошибка.....: ${err}`))
   .finally(()=>  {
     popupAddCardClass.loading(false);
-    popupAddCardClass.close();
+    
   });  
 
 }
@@ -103,18 +104,11 @@ function handleEditAvatarSubmit(getData){
   const inputAvatarUrl = getData();
   api.updateAvatar(inputAvatarUrl[0])    
   .then(res => {
-    if (res.ok) {
-      return res.json();
-    } else{
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }    
-  })
-  .then(res => {
     userData.setUserInfo(res);
+    popupEditAvatar.close();
   })
   .catch(err => console.log(`Ошибка.....: ${err}`)) 
   .finally(()=>  {
-    popupEditAvatar.close();
     popupEditAvatar.loading(false); 
   });
 }
