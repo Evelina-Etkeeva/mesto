@@ -116,13 +116,13 @@ export default class Api {
       body: JSON.stringify({
         avatar: data,
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else{
-          return Promise.reject(`Ошибка: ${res.status}`);
-        }    
-      })
-    })  
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else{
+        return Promise.reject(`Ошибка: ${res.status}`);
+      }    
+    })
   }
 }
